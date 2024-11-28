@@ -10,6 +10,9 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { HEADING_LINK_ANCHOR } from './src/ui/headings';
 
+// Shiki Transformers:
+import { transformerMetaHighlight } from '@shikijs/transformers';
+
 // Astro config:
 export default defineConfig({
   site: 'https://toast.pheralb.dev',
@@ -26,6 +29,7 @@ export default defineConfig({
           dark: 'github-dark',
         },
         wrap: true,
+        transformers: [transformerMetaHighlight()],
       },
       gfm: true,
       rehypePlugins: [
