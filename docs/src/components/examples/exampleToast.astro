@@ -1,0 +1,44 @@
+---
+import { Code } from 'astro:components';
+import { Button } from '@/ui/button';
+import { toast, type ToastVariant as Variant } from '@pheralb/toast';
+
+const variants: Variant[] = ['success', 'error', 'warning', 'info'];
+let selectedVariant = 'default';
+
+const handleChangeVariant = (variant: Variant) => {
+  selectedVariant = variant;
+  if (variant !== 'loading') {
+    toast[variant]({
+      text: `A ${variant} toast 🚀`,
+      description: '✨ @pheralb/toast',
+    });
+  }
+};
+
+const handleDefault = () => {
+  selectedVariant = 'default';
+  toast.default({
+    text: 'A default toast 🚀',
+    description: '✨ @pheralb/toast',
+  });
+};
+---
+
+<div class="my-2 flex flex-col space-y-2">
+  <div class="flex items-center space-x-2 overflow-y-auto">
+    <Button variant="outline" onClick={() => handleDefault()}> default </Button>
+    {
+      variants.map((variant) => (
+        <Button
+          key={variant}
+          variant="outline"
+          onClick={() => handleChangeVariant(variant)}
+        >
+          {variant}
+        </Button>
+      ))
+    }
+  </div>
+  <Code code={`const foo = 'bar';`} lang="js" />
+</div>

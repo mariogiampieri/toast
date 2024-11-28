@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content';
+
+import Markdown from '@/layouts/markdown.layout.astro';
+import Article from '@/components/article.astro';
+import Toc from '@/components/toc.astro';
+
+const entry = await getEntry('docs', 'welcome');
+const { Content, headings } = await entry.render();
+---
+
+<Markdown frontmatter={entry.data}>
+  <Article
+    hideHeader={true}
+    title={entry.data.title}
+    description={entry.data.description}
+  >
+    <Content />
+  </Article>
+  {
+    headings.length > 0 && (
+      <div>
+        <Toc headings={headings} />
+      </div>
+    )
+  }
+</Markdown>

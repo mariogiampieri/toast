@@ -29,43 +29,8 @@ const ToastCodeBlock = (props: CodeBlockProps) => {
 
   return (
     <div className="relative">
-      <pre
-        style={{
-          backgroundColor: '#101010',
-          color: '#FFFFFF',
-          margin: '0',
-        }}
-        data-language="ts"
-        data-theme="vesper"
-        ref={preRef}
-      >
-        <code
-          data-language="ts"
-          data-theme="vesper"
-          style={{ display: 'block' }}
-        >
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}>toast.</span>
-            <span style={{ color: 'rgb(255, 199, 153)' }}>{props.value}</span>
-            <span style={{ color: 'rgb(255, 255, 255)' }}>({`{`}</span>
-          </span>
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}> text: </span>
-            <span style={{ color: 'rgb(153, 255, 228)' }}>
-              &apos;A {props.label} toast 🚀&apos;
-            </span>
-            <span style={{ color: 'rgb(255, 255, 255)' }}>,</span>
-          </span>
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}> description: </span>
-            <span style={{ color: 'rgb(153, 255, 228)' }}>
-              &apos;✨ A beautiful toast library for React&apos;
-            </span>
-          </span>
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}>{`});`}</span>
-          </span>
-        </code>
+      <pre ref={preRef}>
+        <code>{props.value}</code>
       </pre>
       <button className={CopyCodeBtnStyles} onClick={copyPreContent}>
         <span className="sr-only">Copy</span>
@@ -98,8 +63,8 @@ const ToastVariantExamples = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-0">
-      <div className="flex items-center space-x-2 overflow-y-auto pb-2">
+    <div className="my-2 flex flex-col space-y-2">
+      <div className="flex items-center space-x-2 overflow-y-auto">
         <Button variant="outline" onClick={() => handleDefault()}>
           default
         </Button>
@@ -147,7 +112,7 @@ const ToastActionsExamples = () => {
 
   return (
     <Button
-      className="mb-2"
+      className="my-2"
       variant="outline"
       onClick={() => handleChangeVariant()}
     >
@@ -211,20 +176,12 @@ const ToastLoadingExample = () => {
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      <Button
-        className="mb-2"
-        variant="outline"
-        onClick={() => handleToastLoading(true)}
-      >
+    <div className="my-2 flex items-center space-x-2">
+      <Button variant="outline" onClick={() => handleToastLoading(true)}>
         <CircleCheckIcon size={16} />
         <span>Show a Loading Toast (Success)</span>
       </Button>
-      <Button
-        className="mb-2"
-        variant="outline"
-        onClick={() => handleToastLoading(false)}
-      >
+      <Button variant="outline" onClick={() => handleToastLoading(false)}>
         <CircleAlertIcon size={16} />
         <span>Show a Loading Toast (Error)</span>
       </Button>
