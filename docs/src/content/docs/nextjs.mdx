@@ -4,6 +4,10 @@ description: 'How to use the library with Next.js'
 category: 'Framework guides'
 ---
 
+> 💡 This guide shows how to use the library with Next.js /app router. Also supports /pages router.
+
+## Create a new Next.js project
+
 1. Create a new Next.js project:
 
 ```bash
@@ -18,21 +22,22 @@ npx create-next-app@latest
 √ Would you like to use ESLint? ... Yes
 √ Would you like to use Tailwind CSS? ... Yes (👈 optional)
 √ Would you like to use `src/` directory? ... Yes (👈 optional)
-√ Would you like to use App Router? (recommended) ... Yes
-√ Would you like to customize the default import alias (@/*)? ... No
+#...
 ```
 
-3. Install the library:
+## Add the library
+
+1. Install the library:
 
 ```bash
 npm install @pheralb/toast
 ```
 
-4. Add the [`Toaster`](/toaster) to the `layout.tsx` file:
+2. Add the [`Toaster`](/toaster) to the `layout.tsx` file:
 
 > 💡 By default, `Toaster` includes `use client` directive.
 
-```tsx
+```tsx {1,13}
 // 📃 layout.tsx
 import { Toaster } from '@pheralb/toast';
 
@@ -52,7 +57,7 @@ export default function RootLayout({
 }
 ```
 
-5. Use the [`toast`](/toast) function in your **client** components:
+3. Use the [`toast`](/toast) function in your **client** components:
 
 ```tsx
 'use client';
@@ -70,6 +75,30 @@ export default function MyComponent() {
     >
       Click me!
     </button>
+  );
+}
+```
+
+## Add the styles (optional)
+
+The library exports a CSS file that you can include in your project. Only use in cases where the toast styles do not render correctly:
+
+```tsx
+// 📄 app/layout.tsx
+
+import type { ReactNode } from 'react';
+
+import '@pheralb/toast/dist/styles.css';
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
   );
 }
 ```

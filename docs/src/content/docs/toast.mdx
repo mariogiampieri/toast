@@ -1,6 +1,6 @@
 ---
 title: 'Toast'
-description: 'Use toast to create a toast from anywhere in your React application.'
+description: 'Use toast to create a toast from anywhere in your React application'
 category: 'API'
 ---
 
@@ -9,22 +9,29 @@ import {
   ToastActionsExamples,
   ToastLoadingExample,
 } from '../../components/examples/toast';
+import ExampleToast from '../../components/examples/exampleToast.astro';
 
 > 💡 Make sure you add the [`<Toaster />`](/toaster) provider to your app first.
 
-1. Import the `toast` function:
-
 ```tsx
 import { toast } from '@pheralb/toast';
+
+toast.default({
+  text: `Hello ✨`,
+});
 ```
 
-2. Render a toast:
+## toast.variant
 
-- `toast.variant`: Show a toast with a specific variant:
+Show a toast with a specific variant:
 
-<ToastVariantExamples client:only="react" />
+<ExampleToast client:load />
 
-- `toast.variant` with `action`: Show a _Action_ button and execute a custom function when clicked:
+````tsx
+
+## toast.variant with action
+
+Show a button and execute a custom function when clicked. The default text for the button is `Action`:
 
 <ToastActionsExamples client:only="react" />
 
@@ -38,9 +45,11 @@ toast.default({
     },
   },
 });
-```
+````
 
-- `toast.loading`: Show a toast with loading state and will update automatically after the promise resolves or fails:
+## toast.loading
+
+Show a toast with loading state and will update automatically after the promise resolves or fails:
 
 <ToastLoadingExample client:only="react" />
 
