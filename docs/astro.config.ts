@@ -20,7 +20,13 @@ export default defineConfig({
     }),
     mdx({
       syntaxHighlight: 'shiki',
-      shikiConfig: { theme: 'vesper', wrap: true },
+      shikiConfig: {
+        themes: {
+          light: 'github-light',
+          dark: 'github-dark',
+        },
+        wrap: true,
+      },
       gfm: true,
       rehypePlugins: [
         rehypeSlug,
