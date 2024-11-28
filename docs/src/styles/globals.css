@@ -15,6 +15,7 @@
 @font-face {
   font-family: 'GeistMono';
   src: url('/fonts/GeistMonoVF.woff2') format('woff2');
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -22,13 +23,21 @@
 
 html.light .astro-code,
 html.light .astro-code span {
-  background-color: transparent !important;
+  background-color: #fafafa !important;
+}
+
+html.light .astro-code .highlighted {
+  background-color: #fafafa !important;
+}
+
+html.dark .astro-code .line .highlighted {
+  background-color: green !important;
 }
 
 html.dark .astro-code,
 html.dark .astro-code span {
   color: var(--shiki-dark) !important;
-  background-color: transparent !important;
+  background-color: #171717 !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
