@@ -15,12 +15,9 @@ const { frontmatter } = Astro.props;
   title={`${frontmatter.title} - ${siteTitle}`}
   description={frontmatter.description}
 >
-  <article
-    class={cn(
-      'ml-0 max-w-4xl py-7 duration-100 md:ml-[273px] scroll-smooth',
-      proseClasses,
-    )}
+  <div
+    class={cn('relative md:ml-60 lg:gap-10 xl:grid-cols-[1fr,150px] xl:grid')}
   >
     <slot />
-  </article>
+  </div>
 </Layout>

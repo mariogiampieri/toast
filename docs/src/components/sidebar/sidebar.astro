@@ -8,9 +8,10 @@ const currentPath = Astro.url.pathname;
 
 <nav
   class={cn(
-    'fixed h-[calc(100vh-4rem)] overflow-y-auto overflow-x-hidden pb-10',
+    'fixed w-48 h-[calc(100vh-4rem)] z-50 overflow-y-auto overflow-x-hidden pb-10',
     'bg-neutral-50 dark:bg-neutral-900',
     'flex flex-col',
+    'border-r border-neutral-200 dark:border-neutral-800',
   )}
 >
   <div class="flex flex-1 flex-col space-y-8 py-7">
@@ -24,6 +25,7 @@ const currentPath = Astro.url.pathname;
             {route.routes.map((r) => (
               <a
                 href={r.path}
+                title={r.title}
                 class={cn(
                   'px-4 py-2 text-sm',
                   'border-l border-neutral-200 dark:border-neutral-800',

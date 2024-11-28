@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 
-import { buttonVariants } from '@/ui/button';
-import { PenLineIcon } from 'lucide-react';
-
 // Layouts:
 import Markdown from '@/layouts/markdown.layout.astro';
+import { cn } from '@/utils';
+import { proseClasses } from '@/ui/prose';
+import Toc from '@/components/toc.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('docs');
@@ -15,32 +15,27 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry, slug } = Astro.props;
-const { Content } = await entry.render();
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
 ---
 
 <Markdown frontmatter={entry.data}>
-  <div
-    class="mt-1 mb-7 flex flex-col space-y-2 border-b border-neutral-200 dark:border-neutral-800"
-  >
-    <h1 class="text-4xl mt-0 tracking-tight font-semibold">
-      {entry.data.title}
-    </h1>
-    <p>{entry.data.description}</p>
-    <div class="flex items-center justify-end w-full pb-2">
-      <a
-        target="_blank"
-        href={`https://github.com/pheralb/toast/blob/main/docs/src/content/docs/${slug}.mdx`}
-        class={buttonVariants({
-          variant: 'ghost',
-          className:
-            'no-underline dark:text-neutral-400 dark:hover:text-white text-neutral-500 hover:text-black',
-        })}
-      >
-        <PenLineIcon className="w-4 h-4 mr-1" />
-        <span>Edit this page</span>
-      </a>
+  <article class={cn(proseClasses, 'py-6 w-screen')}>
+    <div
+      class="mt-4 mb-6 pb-5 flex flex-col space-y-2 border-b border-neutral-200 dark:border-neutral-800"
+    >
+      <h1 class="text-4xl mt-0 tracking-tight font-semibold">
+        {entry.data.title}
+      </h1>
+      <p>{entry.data.description}</p>
     </div>
-  </div>
-  <Content />
+    <Content />
+  </article>
+  {
+    headings.length > 0 && (
+      <div>
+        <Toc headings={headings} />
+      </div>
+    )
+  }
 </Markdown>

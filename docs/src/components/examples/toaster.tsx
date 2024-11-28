@@ -14,6 +14,7 @@ import {
   CheckCheckIcon,
   CheckIcon,
   CopyIcon,
+  MonitorIcon,
   MoonIcon,
   RefreshCcwIcon,
   SunIcon,
@@ -80,8 +81,8 @@ const Positions = () => {
     setToastPosition(position);
   };
   return (
-    <div className="flex flex-col space-y-0">
-      <div className="flex items-center space-x-2 overflow-y-auto py-2">
+    <div className="flex flex-col space-y-2">
+      <div className="custom-scrollbar flex items-center space-x-2 overflow-y-auto">
         <Button
           variant="outline"
           className={toastPosition === 'top-left' ? activeBtn : ''}
@@ -154,9 +155,9 @@ const ThemeExamples = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-0">
+    <div className="flex flex-col space-y-2">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2 py-2">
+        <div className="flex items-center space-x-2">
           <Button
             variant="outline"
             className={toastTheme === 'light' ? activeBtn : ''}
@@ -180,6 +181,18 @@ const ThemeExamples = () => {
               <MoonIcon size={iconSize} />
             )}
             <span>dark</span>
+          </Button>
+          <Button
+            variant="outline"
+            className={toastTheme === 'system' ? activeBtn : ''}
+            onClick={() => handleChangeTheme('system')}
+          >
+            {toastTheme === 'system' ? (
+              <CheckIcon size={iconSize} />
+            ) : (
+              <MonitorIcon size={iconSize} />
+            )}
+            <span>system</span>
           </Button>
         </div>
         <Button variant="ghost" onClick={() => handleChangeTheme(undefined)}>
