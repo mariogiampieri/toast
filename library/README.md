@@ -42,7 +42,7 @@
 
 - [x] 🍂 Lightweight.
 - [x] ✅ Accessible.
-- [x] 🎨 Light/dark mode.
+- [x] 🎨 Light, dark & system theme mode.
 - [x] ⏲️ Don't close automatically when the user hover over the toast.
 - [x] 🏗️ Customizable toast position.
 - [x] 🍃 Disable transitions if the user has disabled them in the system.
@@ -119,6 +119,7 @@ export default function Index() {
 
 - [x] 🚗 Add `.loading` variant.
 - [x] 📚 Add support for Astro + React.
+- [x] ✨ Export bundled & minified `.css` file.
 - [ ] 🎨 Add rich colors support.
 
 ## 🤝 Contributing
@@ -126,8 +127,8 @@ export default function Index() {
 [`pheralb/toast`](https://github.com/pheralb/toast) is a monorepo built with [Turbo](https://turbo.build/repo) and it uses:
 
 - [**Docs**](https://github.com/pheralb/toast/tree/main/docs): Astro Content Collections, shadcn/ui + Tailwind CSS & MDX.
-- [**Library**](https://github.com/pheralb/toast/tree/main/library): React 18 with tsup + Vitest for testing.
-- [**Examples**](https://github.com/pheralb/toast/tree/main/examples): Frameworks to test the library.
+- [**Library**](https://github.com/pheralb/toast/tree/main/library): React 18 with tsup + Lightning CSS + Vitest for testing.
+- [**Examples**](https://github.com/pheralb/toast/tree/main/examples): Apps to test the library.
 
 1. [Click here to fork](https://github.com/pheralb/toast/fork) the repository.
 
