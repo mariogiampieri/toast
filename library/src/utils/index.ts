@@ -1,8 +1,32 @@
-// support for conditional classnames
-export const classNames = (...classes: string[]): string =>
-  classes.filter(Boolean).join(' ');
+type ClassValue =
+  | string
+  | boolean
+  | null
+  | undefined
+  | ClassValue[]
+  | { [key: string]: boolean };
 
-// generating random id
+// Classnames utility function (like classnames npm package):
+export const classNames = (...classes: ClassValue[]): string => {
+  const result: string[] = [];
+  const processClassValue = (value: ClassValue) => {
+    if (typeof value === 'string' && value) {
+      result.push(value);
+    } else if (Array.isArray(value)) {
+      value.forEach(processClassValue);
+    } else if (typeof value === 'object' && value !== null) {
+      for (const key in value) {
+        if (Object.prototype.hasOwnProperty.call(value, key) && value[key]) {
+          result.push(key);
+        }
+      }
+    }
+  };
+  classes.forEach(processClassValue);
+  return result.join(' ');
+};
+
+// Generating random id:
 export const generateRandomId = () => Math.floor(Math.random() * 1000000);
 
 // Disable transitions when prefers reduced motion is enabled:
@@ -22,3 +46,13 @@ export const prefersReducedMotion = (() => {
     return shouldReduceMotion;
   };
 })();
+
+// Get system theme:
+export const getSystemTheme = () => {
+  if (typeof window !== 'undefined') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+  return 'light';
+};
