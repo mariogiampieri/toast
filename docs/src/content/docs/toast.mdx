@@ -108,6 +108,17 @@ toast.loading({
 });
 ```
 
+## Custom Icon
+
+You can use a custom icon for the toast using `icon` property:
+
+```tsx
+toast.default({
+  text: 'Party popper!',
+  icon: <PartyPopperIcon width={18} height={18} />,
+});
+```
+
 ## API Reference
 
 The `toast.variant` function accepts the following options:
@@ -118,5 +129,6 @@ The `toast.variant` function accepts the following options:
 | `description`   | Toast's description                           | `string`                                                                      | -        |
 | `icon`          | Icon to display in the toast                  | `ReactNode`                                                                   | -        |
 | `delayDuration` | Duration before the toast disappears          | `number` (default: `4000`)                                                    | -        |
+| `variant`       | Variant of the toast                          | `Variant`: `info`, `success`, `warning`, `error` or `loading`                 | -        |
 | `theme`         | Theme of the toast                            | `Theme` (default: `system`): `light`, `dark` or `system`                      | -        |
 | `action`        | Show a _Action_ button and execute a function | `label` (default text: `action`) & `onClick`: `() => void` or `Promise<void>` | -        |
