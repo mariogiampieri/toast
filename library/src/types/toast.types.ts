@@ -9,12 +9,15 @@ export type Position =
   | 'bottom-left'
   | 'bottom-right'
   | 'bottom-center';
+
 export type Theme = 'light' | 'dark' | 'system';
 
 export interface Action {
   text?: string;
   onClick: () => void | (() => Promise<void>);
 }
+
+export type ToastIcons = Record<Variant, ReactNode>;
 
 export type ToastProps = {
   id?: number;
@@ -44,6 +47,7 @@ export type ToasterProperties = {
   maxToasts?: number;
   position?: Position;
   toastFont?: string;
+  toastIcons?: ToastIcons;
 };
 
 export interface ToastPropsWithVariant extends ToastProps {

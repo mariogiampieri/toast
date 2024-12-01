@@ -1,22 +1,14 @@
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useState } from 'react';
 import type {
   Position,
+  ToastIcons,
   ToastPropsWithLoading,
   Variant,
 } from '../types/toast.types';
-import '../styles/toast-component.css';
 
 import { Error, Info, Loading, Success, Warning } from '../icons';
 import { useTimeout } from '../hooks/useTimeout';
 import { classNames, prefersReducedMotion } from '../utils';
-
-const icons: Record<Variant, FC<React.SVGProps<SVGSVGElement>>> = {
-  success: Success,
-  error: Error,
-  warning: Warning,
-  info: Info,
-  loading: Loading,
-};
 
 const iconsColors: Record<Variant, string> = {
   success: '#22c55e',
@@ -28,20 +20,74 @@ const iconsColors: Record<Variant, string> = {
 
 interface ToastComponentProps extends ToastPropsWithLoading {
   toastPosition: Position;
+  toastCustomIcons?: ToastIcons;
   onClose: () => void;
 }
 
 const Toast = (props: ToastComponentProps) => {
   const [status, setStatus] = useState<Variant>(props.variant || 'info');
+
   const [iconColor, setIconColor] = useState<string>(iconsColors[status]);
+
   const [toastText, setToastText] = useState<string>(props.text);
-  const IconComponent = icons[status];
   const [isExiting, setIsExiting] = useState<boolean>(false);
   const delayDuration = props.delayDuration || 4000;
 
   const { pauseTimer, resumeTimer } = useTimeout(() => {
     handleCloseToast();
   }, delayDuration);
+
+  const iconClass = classNames(
+    't_icon',
+    props.variant === 'loading' && status === 'loading' ? 't_loading' : '',
+  );
+
+  const icons: ToastIcons = {
+    success: (
+      <Success
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    error: (
+      <Error
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    warning: (
+      <Warning
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    info: (
+      <Info
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    loading: (
+      <Loading
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+  };
+
+  const IconComponent = props.toastCustomIcons
+    ? props.toastCustomIcons[status]
+    : icons[status];
 
   const handleCloseToast = () => {
     setIsExiting(true);
@@ -143,17 +189,7 @@ const Toast = (props: ToastComponentProps) => {
     >
       <div className="t_container">
         {props.variant && !props.icon ? (
-          <IconComponent
-            width={18}
-            height={18}
-            style={{ fill: iconColor }}
-            className={classNames(
-              't_icon',
-              props.variant === 'loading' && status === 'loading'
-                ? 't_loading'
-                : '',
-            )}
-          />
+          <div className="t_icon">{IconComponent}</div>
         ) : (
           props.icon && <div className="t_icon">{props.icon}</div>
         )}

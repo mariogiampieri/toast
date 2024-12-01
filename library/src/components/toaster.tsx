@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+
 import type {
+  ToastIcons,
   ToastPropsWithVariant,
   ToasterProperties,
 } from '../types/toast.types';
-
-import '../styles/toast-context.css';
 
 import ToastComponent from './toast';
 import { classNames, generateRandomId } from '../utils';
@@ -17,6 +17,7 @@ export const Toaster = ({
   position = 'bottom-right',
   theme = 'system',
   toastFont,
+  toastIcons,
 }: ToasterProperties) => {
   const [toasts, setToasts] = useState<ToastPropsWithVariant[]>([]);
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -88,6 +89,7 @@ export const Toaster = ({
             key={toast.id}
             theme={theme}
             toastPosition={position}
+            toastCustomIcons={toastIcons as ToastIcons}
             onClose={() => closeToast(toast.id!)}
             {...toast}
           />
