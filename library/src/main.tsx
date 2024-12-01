@@ -1,3 +1,5 @@
+import './styles/globals.css';
+
 export { toast } from './components/toast-functions';
 export { Toaster } from './components/toaster';
 export type {
