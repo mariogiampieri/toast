@@ -1,6 +1,6 @@
 {
   "name": "@pheralb/toast",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "author": "@pheralb_",
   "keywords": [
     "react",
@@ -20,13 +20,16 @@
       "require": "./dist/main.cjs",
       "import": "./dist/main.js",
       "types": "./dist/main.d.ts"
-    }
+    },
+    "./dist/styles.css": "./dist/styles.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsc && tsup",
+    "build:library": "tsc && tsup",
+    "build:styles": "lightningcss --minify --bundle ./src/styles/globals.css -o ./dist/styles.css",
     "dev": "tsup --watch",
     "test": "vitest run --config ./vitest.config.ts",
     "test:watch": "vitest --watch",
@@ -47,6 +50,7 @@
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-react-refresh": "0.4.7",
     "jsdom": "24.1.0",
+    "lightningcss-cli": "1.28.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tsup": "8.1.0",
