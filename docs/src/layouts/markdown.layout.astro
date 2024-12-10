@@ -3,7 +3,6 @@ import Layout from './layout.astro';
 
 import { cn } from '@/utils';
 import { siteTitle } from '@/globals';
-import { proseClasses } from '@/ui/prose';
 
 import CopyToClipboard from '@/components/mdx/codeblock-astro.astro';
 
@@ -16,7 +15,9 @@ const { frontmatter } = Astro.props;
   description={frontmatter.description}
 >
   <div
-    class={cn('relative md:ml-60 lg:gap-10 xl:grid-cols-[1fr,150px] xl:grid')}
+    class={cn(
+      'relative ml-0 md:ml-60 lg:gap-10 gap-0 xl:grid-cols-[1fr,150px] xl:grid',
+    )}
   >
     <slot />
   </div>
