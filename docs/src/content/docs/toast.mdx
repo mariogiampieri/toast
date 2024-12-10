@@ -9,7 +9,6 @@ import {
   ToastActionsExamples,
   ToastLoadingExample,
 } from '../../components/examples/toast';
-import ExampleToast from '../../components/examples/exampleToast.astro';
 
 > 💡 Make sure you add the [`<Toaster />`](/toaster) provider to your app first.
 
@@ -25,9 +24,7 @@ toast.default({
 
 Show a toast with a specific variant:
 
-<ExampleToast client:load />
-
-````tsx
+<ToastVariantExamples client:only="react" />
 
 ## toast.variant with action
 
@@ -45,7 +42,7 @@ toast.default({
     },
   },
 });
-````
+```
 
 ## toast.loading
 

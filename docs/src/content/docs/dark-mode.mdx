@@ -6,9 +6,134 @@ category: 'Customization'
 
 > 💡 If you need to activate the dark mode directly, you can use the `theme` property: [`show`](/toaster#theme)
 
+## Vite
+
+<details>
+  <summary>Click here to show the Dark Mode Theme snippet (optional)</summary>
+
+- Snippet from [`shadcn/ui` Dark Mode documentation](https://ui.shadcn.com/docs/dark-mode/vite#dark-mode).
+
+```tsx
+import { createContext, useContext, useEffect, useState } from 'react';
+
+export type Theme = 'dark' | 'light' | 'system';
+
+type ThemeProviderProps = {
+  children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
+};
+
+type ThemeProviderState = {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+};
+
+const initialState: ThemeProviderState = {
+  theme: 'system',
+  setTheme: () => null,
+};
+
+const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
+
+export function ThemeProvider({
+  children,
+  defaultTheme = 'system',
+  storageKey = 'my-ui-theme',
+  ...props
+}: ThemeProviderProps) {
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+  );
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+
+    root.classList.remove('light', 'dark');
+
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
+
+      root.classList.add(systemTheme);
+      root.style.colorScheme = systemTheme;
+      return;
+    }
+
+    root.classList.add(theme);
+    root.style.colorScheme = theme;
+  }, [theme]);
+
+  const value = {
+    theme,
+    setTheme: (theme: Theme) => {
+      localStorage.setItem(storageKey, theme);
+      setTheme(theme);
+    },
+  };
+
+  return (
+    <ThemeProviderContext.Provider {...props} value={value}>
+      {children}
+    </ThemeProviderContext.Provider>
+  );
+}
+
+export const useTheme = () => {
+  const context = useContext(ThemeProviderContext);
+
+  if (context === undefined)
+    throw new Error('useTheme must be used within a ThemeProvider');
+
+  return context;
+};
+```
+
+</details>
+
+1. Create a `ToasterProvider.tsx` file with the following content:
+
+- Import the `useTheme` hook from the `ThemeProvider` file.
+- Change the `theme` value based on the current theme.
+
+```tsx
+// 📄 components/ToasterProvider.tsx
+
+import type { ToasterProperties } from '@pheralb/toast';
+import { Toaster } from '@pheralb/toast';
+
+import { useTheme } from './themeProvider';
+
+const ToasterProvider = (props: ToasterProperties) => {
+  const { theme } = useTheme();
+  return <Toaster theme={theme} {...props} />;
+};
+
+export default ToasterProvider;
+```
+
+2. Import the `ToasterProvider` component in the `main.tsx` file:
+
+```tsx
+// 📄 main.tsx
+
+import ToasterProvider from './providers/toasterProvider';
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <ThemeProvider defaultTheme="system" storageKey="my-ui-theme">
+      <App />
+      <ToasterProvider />
+    </ThemeProvider>
+  </React.StrictMode>,
+);
+```
+
 ## Next.js with next-themes
 
-> [**Click here**](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#install) to read the documentation.
+> [**Click here**](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#install) to read the `next-themes` documentation.
 
 1. Create a `ToasterNextTheme.tsx` file with the following content:
 
@@ -68,7 +193,7 @@ export default function RootLayout({
 
 ## Remix with remix-themes
 
-> [**Click here**](https://github.com/abereghici/remix-themes?tab=readme-ov-file#getting-started) to read the documentation.
+> [**Click here**](https://github.com/abereghici/remix-themes?tab=readme-ov-file#getting-started) to read the `remix-themes` documentation.
 
 Import the `useTheme` hook from `remix-themes` and change the theme value:
 
