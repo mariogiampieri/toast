@@ -9,13 +9,17 @@ import mdx from '@astrojs/mdx';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { HEADING_LINK_ANCHOR } from './src/ui/headings';
+import { targetBlank } from './src/components/mdx/targetBlank';
 
 // Shiki Transformers:
 import { transformerMetaHighlight } from '@shikijs/transformers';
 
+// Global settings:
+let websiteUrl = 'https://toast.pheralb.dev';
+
 // Astro config:
 export default defineConfig({
-  site: 'https://toast.pheralb.dev',
+  site: websiteUrl,
   integrations: [
     react(),
     tailwind({
@@ -38,6 +42,7 @@ export default defineConfig({
           rehypeAutolinkHeadings,
           { behavior: 'wrap', properties: { className: HEADING_LINK_ANCHOR } },
         ],
+        [targetBlank, { domain: websiteUrl }],
       ],
     }),
   ],
