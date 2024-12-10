@@ -1,4 +1,6 @@
 ---
+import { getCollection } from 'astro:content';
+
 import { cn } from '@/utils';
 import { SocialLinks } from '@/docs.config';
 
@@ -26,7 +28,7 @@ import SearchModal from '@/components/search/searchModal';
         class="group flex items-center space-x-3 font-medium tracking-tight transition-opacity duration-75 hover:opacity-80"
       >
         <Logo width={22} className="group-hover:animate-pulse" />
-        <span class="text-neutral-700 dark:text-neutral-300">
+        <span class="hidden md:block text-neutral-700 dark:text-neutral-300">
           pheralb/toast
         </span>
       </a>
