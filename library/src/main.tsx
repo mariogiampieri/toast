@@ -5,7 +5,8 @@ export { Toaster } from './components/toaster';
 export type {
   Position as ToastPosition,
   ToastProps as ToastProperties,
-  ToasterProperties,
   Variant as ToastVariant,
   Theme as ToastTheme,
+  ToastOptions,
+  ToasterProperties,
 } from './types/toast.types';
