@@ -16,8 +16,7 @@ export const Toaster = ({
   maxToasts = 4,
   position = 'bottom-right',
   theme = 'system',
-  toastFont,
-  toastIcons,
+  toastOptions,
 }: ToasterProperties) => {
   const [toasts, setToasts] = useState<ToastPropsWithVariant[]>([]);
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -74,7 +73,7 @@ export const Toaster = ({
           position === 'bottom-left' ? 't_bottom-left' : '',
           position === 'bottom-right' ? 't_bottom-right' : '',
           position === 'bottom-center' ? 't_bottom-center' : '',
-          toastFont ? toastFont : 't_default_font',
+          toastOptions?.font ? toastOptions?.font : 't_default_font',
         )}
       >
         {toasts.map((toast) => (
@@ -82,8 +81,8 @@ export const Toaster = ({
             key={toast.id}
             theme={theme}
             toastPosition={position}
-            toastCustomIcons={toastIcons as ToastIcons}
             onClose={() => closeToast(toast.id!)}
+            toastOptions={toastOptions}
             {...toast}
           />
         ))}
