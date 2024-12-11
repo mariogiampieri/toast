@@ -33,27 +33,20 @@ export const Toaster = ({
       id: generateRandomId(),
     };
     setToasts((prevToasts) => {
+      const isTopPosition =
+        position === 'top-left' ||
+        position === 'top-right' ||
+        position === 'top-center';
+
       if (prevToasts.length >= maxToasts) {
-        if (
-          position === 'top-left' ||
-          position === 'top-right' ||
-          position === 'top-center'
-        ) {
-          return [newToast, ...prevToasts.slice(0, prevToasts.length - 1)];
-        } else {
-          return [...prevToasts.slice(1), newToast];
-        }
-      } else {
-        if (
-          position === 'top-left' ||
-          position === 'top-right' ||
-          position === 'top-center'
-        ) {
-          return [newToast, ...prevToasts];
-        } else {
-          return [...prevToasts, newToast];
-        }
+        return isTopPosition
+          ? [newToast, ...prevToasts.slice(0, -1)]
+          : [...prevToasts.slice(1), newToast];
       }
+
+      return isTopPosition
+        ? [newToast, ...prevToasts]
+        : [...prevToasts, newToast];
     });
   };
 
