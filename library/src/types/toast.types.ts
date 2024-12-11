@@ -42,12 +42,26 @@ export interface LoadingType {
   onError?: (error: Error) => void;
 }
 
+export interface ToastClassnames {
+  toast: string;
+  container: string;
+  icon: string;
+  content: string;
+  actions: string;
+}
+
+export type ToastOptions = {
+  font?: string;
+  icons?: ToastIcons;
+  headless?: boolean;
+  classNames?: ToastClassnames;
+};
+
 export type ToasterProperties = {
   theme?: Theme;
   maxToasts?: number;
   position?: Position;
-  toastFont?: string;
-  toastIcons?: ToastIcons;
+  toastOptions?: ToastOptions;
 };
 
 export interface ToastPropsWithVariant extends ToastProps {
