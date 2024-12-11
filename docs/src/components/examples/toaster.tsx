@@ -1,73 +1,23 @@
-import type { CodeBlockProps } from './examples.types';
-
 import type {
   ToastPosition as Position,
   ToastTheme as Theme,
 } from '@pheralb/toast';
 
-import { useRef, useState } from 'react';
 import { useDocsStore } from '@/store';
 
 import { toast } from '@pheralb/toast';
 import { Button } from '@/ui/button';
 import {
-  CheckCheckIcon,
   CheckIcon,
-  CopyIcon,
   MonitorIcon,
   MoonIcon,
   RefreshCcwIcon,
   SunIcon,
 } from 'lucide-react';
-import { cn, copyToClipboard } from '@/utils';
-import { CopyCodeBtnStyles } from '@/ui/copyCodeBtn';
+import { cn } from '@/utils';
+import Codeblock from '../codeblock';
 
 const activeBtn = cn('border-neutral-600 dark:border-neutral-700');
-
-const ProviderCodeBlock = (props: CodeBlockProps) => {
-  const preRef = useRef<HTMLPreElement>(null);
-  const [isCopied, setIsCopied] = useState<boolean>(false);
-
-  const copyPreContent = async () => {
-    const content = preRef.current?.textContent ?? '';
-    await copyToClipboard(content);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 700);
-  };
-
-  return (
-    <div className="relative">
-      <pre
-        style={{
-          backgroundColor: '#101010',
-          color: '#FFFFFF',
-          margin: '0',
-        }}
-        data-language="jsx"
-        data-theme="vesper"
-        ref={preRef}
-      >
-        <code
-          data-language="jsx"
-          data-theme="vesper"
-          style={{ display: 'grid' }}
-        >
-          <span data-line="">
-            <span style={{ color: '#A0A0A0' }}>&lt;</span>
-            <span style={{ color: '#FFC799' }}>Toaster</span>
-            <span style={{ color: '#A0A0A0' }}> {props.label}=</span>
-            <span style={{ color: '#99FFE4' }}>&quot;{props.value}&quot;</span>
-            <span style={{ color: '#A0A0A0' }}>&nbsp;/&gt;</span>
-          </span>
-        </code>
-      </pre>
-      <button className={CopyCodeBtnStyles} onClick={copyPreContent}>
-        <span className="sr-only">Copy</span>
-        {isCopied ? <CheckCheckIcon size={16} /> : <CopyIcon size={16} />}
-      </button>
-    </div>
-  );
-};
 
 const Positions = () => {
   const { toastPosition, setToastPosition } = useDocsStore();
@@ -132,7 +82,7 @@ const Positions = () => {
           <span>bottom-center</span>
         </Button>
       </div>
-      <ProviderCodeBlock label="position" value={toastPosition} />
+      <Codeblock code={`<Toaster position="${toastPosition}" />`} lang="tsx" />
     </div>
   );
 };
@@ -200,7 +150,7 @@ const ThemeExamples = () => {
           <span>reset</span>
         </Button>
       </div>
-      <ProviderCodeBlock label="theme" value={toastTheme || 'system'} />
+      <Codeblock code={`<Toaster theme="${toastTheme}" />`} lang="tsx" />
     </div>
   );
 };

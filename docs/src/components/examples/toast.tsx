@@ -1,46 +1,18 @@
-import type { CodeBlockProps } from './examples.types';
 import type { ToastVariant as Variant } from '@pheralb/toast';
 
 import { toast } from '@pheralb/toast';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import JSConfetti from 'js-confetti';
 import {
-  CheckCheckIcon,
   CircleAlertIcon,
   CircleCheckIcon,
-  CopyIcon,
   PartyPopperIcon,
 } from 'lucide-react';
 
 import { Button } from '@/ui/button';
-import { CopyCodeBtnStyles } from '@/ui/copyCodeBtn';
-import { copyToClipboard } from '@/utils';
+import Codeblock from '../codeblock';
 
-const ToastCodeBlock = (props: CodeBlockProps) => {
-  const preRef = useRef<HTMLPreElement>(null);
-  const [isCopied, setIsCopied] = useState<boolean>(false);
-
-  const copyPreContent = async () => {
-    const content = preRef.current?.textContent ?? '';
-    await copyToClipboard(content);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 700);
-  };
-
-  return (
-    <div className="relative">
-      <pre ref={preRef}>
-        <code>{props.value}</code>
-      </pre>
-      <button className={CopyCodeBtnStyles} onClick={copyPreContent}>
-        <span className="sr-only">Copy</span>
-        {isCopied ? <CheckCheckIcon size={16} /> : <CopyIcon size={16} />}
-      </button>
-    </div>
-  );
-};
-
-const ToastVariantExamples = () => {
+export const ToastVariantExamples = () => {
   const [toastVariant, setToastVariant] = useState<string>('success');
   const variants: Variant[] = ['success', 'error', 'warning', 'info'];
 
@@ -78,12 +50,18 @@ const ToastVariantExamples = () => {
           </Button>
         ))}
       </div>
-      <ToastCodeBlock label={toastVariant} value={toastVariant} />
+      <Codeblock
+        code={`toast.${toastVariant}({
+  text: 'A ${toastVariant} toast 🚀'
+  description: '✨ @pheralb/toast'
+});`}
+        lang="typescript"
+      />
     </div>
   );
 };
 
-const ToastActionsExamples = () => {
+export const ToastActionsExamples = () => {
   const handleChangeVariant = () => {
     toast.default({
       text: `A toast with confetti 🎉`,
@@ -122,7 +100,7 @@ const ToastActionsExamples = () => {
   );
 };
 
-const ToastLoadingExample = () => {
+export const ToastLoadingExample = () => {
   const runFunction = async () => {
     await new Promise((resolve) => {
       setTimeout(() => {
@@ -188,5 +166,3 @@ const ToastLoadingExample = () => {
     </div>
   );
 };
-
-export { ToastVariantExamples, ToastActionsExamples, ToastLoadingExample };
