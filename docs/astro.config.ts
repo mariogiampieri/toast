@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 // Integrations:
+import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -19,6 +20,7 @@ let websiteUrl = 'https://toast.pheralb.dev';
 
 // Astro config:
 export default defineConfig({
+  adapter: vercel(),
   site: websiteUrl,
   integrations: [
     react(),
