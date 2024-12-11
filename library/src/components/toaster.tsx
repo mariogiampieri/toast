@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import type {
-  ToastIcons,
   ToastPropsWithVariant,
   ToasterProperties,
 } from '../types/toast.types';
