@@ -27,7 +27,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc && tsup",
+    "build": "pnpm build:library && pnpm build:styles",
     "build:library": "tsc && tsup",
     "build:styles": "lightningcss --minify --bundle ./src/styles/globals.css -o ./dist/styles.css",
     "dev": "tsup --watch",
