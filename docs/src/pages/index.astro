@@ -1,19 +1,24 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 import Markdown from '@/layouts/markdown.layout.astro';
 import Article from '@/components/article.astro';
 import Toc from '@/components/toc.astro';
 
-const entry = await getEntry('docs', 'welcome');
-const { Content, headings } = await entry.render();
+const document = await getEntry('docs', 'welcome');
+
+if (!document) {
+  return Astro.redirect('/404');
+}
+
+const { Content, headings } = await render(document);
 ---
 
-<Markdown frontmatter={entry.data}>
+<Markdown frontmatter={document.data}>
   <Article
     hideHeader={true}
-    title={entry.data.title}
-    description={entry.data.description}
+    title={document.data.title}
+    description={document.data.description}
   >
     <Content />
   </Article>
