@@ -7,7 +7,7 @@ import {
 import { useEffect, useState } from 'react';
 
 const ToasterPlayground = (props: ToasterProperties) => {
-  const { toastPosition, toastTheme } = useDocsStore();
+  const { applyCustomTheme, toastPosition, toastTheme } = useDocsStore();
   const [theme, setThemeState] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
@@ -19,6 +19,10 @@ const ToasterPlayground = (props: ToasterProperties) => {
     <Toaster
       position={toastPosition}
       theme={toastTheme ?? (theme as ToastTheme)}
+      toastOptions={{
+        font: applyCustomTheme ? applyCustomTheme.font : 'font-sans',
+        ...applyCustomTheme,
+      }}
       {...props}
     />
   );
