@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { toast } from '@pheralb/toast';
 
-import { copyToClipboard } from '@/utils';
+import { cn, copyToClipboard } from '@/utils';
 import { CheckCheckIcon, CopyIcon } from 'lucide-react';
 import { createHighlighter, makeSingletonHighlighter } from 'shiki/bundle/web';
 
@@ -10,11 +10,17 @@ type Languages = 'typescript' | 'tsx';
 interface CodeHighlightProps {
   code: string;
   lang?: Languages;
+  className?: string;
+  iconText?: string;
+  icon?: ReactNode;
 }
 
 export default function Codeblock({
   code,
   lang = 'typescript',
+  icon,
+  iconText,
+  className,
 }: CodeHighlightProps) {
   const [highlightedCode, setHighlightedCode] = useState<string>('');
   const [isCopied, setIsCopied] = useState<boolean>(false);
@@ -60,7 +66,7 @@ export default function Codeblock({
   };
 
   return (
-    <div className="relative">
+    <div className={cn('relative', className)}>
       <button
         title="Copy code"
         className="absolute right-0 top-0 m-3 text-white opacity-50 transition-opacity hover:opacity-100"
@@ -72,6 +78,12 @@ export default function Codeblock({
         className="bg-transparent"
         dangerouslySetInnerHTML={{ __html: highlightedCode }}
       />
+      <div
+        title={iconText}
+        className="absolute bottom-0 right-0 m-3 font-mono text-[10px] text-black"
+      >
+        <span>{icon}</span>
+      </div>
     </div>
   );
 }
