@@ -11,7 +11,7 @@ interface DocsStore {
   toastVariant: ToastVariant;
   toastTheme: ToastTheme | undefined;
   applyCustomTheme: ToastOptions | undefined;
-  setApplyCustomTheme: (properties: ToastOptions) => void;
+  setApplyCustomTheme: (properties: ToastOptions | undefined) => void;
   setToastPosition: (position: ToastPosition) => void;
   setToastVariant: (variant: ToastVariant) => void;
   setToastTheme: (theme: ToastTheme | undefined) => void;
