@@ -4,6 +4,8 @@ description: 'The <Toaster /> component is used to show toasts in your applicati
 category: 'Customization'
 ---
 
+import ToastCustomOptions from '@/components/examples/toastCustomOptions';
+
 ```tsx
 import { Toaster } from '@pheralb/toast';
 
@@ -54,7 +56,7 @@ You can change this value using the `font` property. In this case, we are using 
 />
 ```
 
-> 💡 To modify the icon of a **single** toast: [``toast - Custom Icon``](/toast#custom-icon)
+> 💡 To modify the icon of a **single** toast: [`toast - Custom Icon`](/toast#custom-icon)
 
 ## Styling
 
@@ -63,17 +65,25 @@ To customize toasts with personalized styles:
 1. Activate the `headless` property.
 2. Use the `classNames` property.
 
-```tsx
-<Toaster
-  toastOptions={{
-    headless: true,
-    classNames: {
-      toast: '',
-      container: '',
-      icon: '',
-      content: '',
-      actions: '',
-    },
-  }}
-/>
-```
+<ToastCustomOptions client:load />
+
+## API Reference
+
+- `toastOptions` from [`<Toaster />`](/toaster#api-reference) accepts the following properties:
+
+| Property     | Description                                                     | Type                         | Required |
+| ------------ | --------------------------------------------------------------- | ---------------------------- | -------- |
+| `font`       | Font for all toasts                                             | `string`                     | -        |
+| `icons`      | Icons for all toasts                                            | `Record<Variant, ReactNode>` | -        |
+| `headless`   | Disable all default styles. It works together with `classNames` | `boolean`                    | -        |
+| `classNames` | Custom styles for all toasts                                    | `ToastClassnames`            | -        |
+
+- `classNames` from `toastOptions` accepts the following properties:
+
+| Property    | Description                           | Type     | Required |
+| ----------- | ------------------------------------- | -------- | -------- |
+| `toast`     | Global toast style                    | `string` | ✅       |
+| `container` | Toast container styles                | `string` | ✅       |
+| `icon`      | Styles for the main icon of the toast | `string` | ✅       |
+| `content`   | Styles for title and description      | `string` | ✅       |
+| `actions`   | Styles for the buttons                | `string` | ✅       |
