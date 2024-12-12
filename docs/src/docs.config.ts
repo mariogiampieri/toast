@@ -82,6 +82,10 @@ export const SidebarRoutes: iDocsRoutes[] = [
         title: 'Dark Mode',
         path: '/dark-mode',
       },
+      {
+        title: 'Toast Options',
+        path: '/options',
+      },
     ],
   },
 ];

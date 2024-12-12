@@ -1,0 +1,79 @@
+---
+title: 'Toast Options'
+description: 'The <Toaster /> component is used to show toasts in your application'
+category: 'Customization'
+---
+
+```tsx
+import { Toaster } from '@pheralb/toast';
+
+<Toaster
+  toastOptions={
+    {
+      // Your custom config.
+    }
+  }
+/>;
+```
+
+## `font`
+
+By default, the font of the toasts is:
+
+```txt
+ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe
+UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+```
+
+You can change this value using the `font` property. In this case, we are using the utility class [`font-sans` from Tailwind CSS](https://tailwindcss.com/docs/font-family#setting-the-font-family) to set the font:
+
+```jsx
+<Toaster
+  toastOptions={{
+    font: 'font-sans',
+  }}
+/>
+```
+
+## `icons`
+
+`@pheralb/toast` use [Phosphor Icons](https://phosphoricons.com/) by default. You can change the default icons for all toasts using `icons` property:
+
+```tsx
+<Toaster
+  toastOptions={{
+    icons: {
+      info: <Info className="dark:text-blue-500" />,
+      error: <CircleX className="text-red-500" />,
+      warning: <CircleAlert className="text-yellow-500" />,
+      success: <CircleCheck className="text-green-500" />,
+      loading: <Loader className="animate-spin text-gray-500" />,
+    },
+  }}
+/>
+```
+
+> 💡 To modify the icon of a **single** toast: [``toast - Custom Icon``](/toast#custom-icon)
+
+## Styling
+
+To customize toasts with personalized styles:
+
+1. Activate the `headless` property.
+2. Use the `classNames` property.
+
+```tsx
+<Toaster
+  toastOptions={{
+    headless: true,
+    classNames: {
+      toast: '',
+      container: '',
+      icon: '',
+      content: '',
+      actions: '',
+    },
+  }}
+/>
+```

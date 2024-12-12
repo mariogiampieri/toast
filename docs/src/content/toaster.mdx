@@ -32,48 +32,14 @@ By default, the maximum number of toasts is set to `4`. You can change this valu
 <Toaster maxToasts={8} />
 ```
 
-## ToastFont
-
-By default, the font of the toasts is:
-
-```txt
-ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe
-UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-```
-
-You can change this value using the `toastFont` prop. In this case, we are using the utility class [`font-sans` from Tailwind CSS](https://tailwindcss.com/docs/font-family#setting-the-font-family) to set the font:
-
-```jsx
-<Toaster toastFont="font-sans" />
-```
-
-## ToastIcons
-
-`@pheralb/toast` use [Phosphor Icons](https://phosphoricons.com/) by default. You can change the default icons for all toasts using `toastIcons` property:
-
-```tsx
-<Toaster
-  toastIcons={{
-    info: <Info className="dark:text-blue-500" />,
-    error: <CircleX className="text-red-500" />,
-    warning: <CircleAlert className="text-yellow-500" />,
-    success: <CircleCheck className="text-green-500" />,
-    loading: <Loader className="animate-spin text-gray-500" />,
-  }}
-/>
-```
-
-> 💡 To change the icon of a specific toast [click here](/toast#custom-icon)
-
 ## API Reference
 
 The `<Toaster />` component accepts the following options:
 
-| Property     | Description                                 | Type                                                                                                                                      | Required |
-| ------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `theme`      | Theme of the all toasts                     | `Theme` (default: `system`): `'light'`, `'dark'`, or `'system'`                                                                           | -        |
-| `maxToasts`  | Maximum number of toasts to display         | `number`                                                                                                                                  | -        |
-| `toastIcons` | Replace the default icons with custom icons | `Record<Variant, ReactNode>`                                                                                                              | -        |
-| `position`   | Position of the toaster on the screen       | `Position` (default: `bottom-right`): `'top-left'`, `'top-right'`, `'top-center'`, `'bottom-left'`, `'bottom-right'` or `'bottom-center'` | -        |
-| `toastFont`  | Font style for the all toasts               | `string`                                                                                                                                  | -        |
+| Property       | Description                                 | Type                                                                                                                                      | Required |
+| -------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `theme`        | Theme of the all toasts                     | `Theme` (default: `system`): `'light'`, `'dark'`, or `'system'`                                                                           | -        |
+| `maxToasts`    | Maximum number of toasts to display         | `number`                                                                                                                                  | -        |
+| `toastIcons`   | Replace the default icons with custom icons | `Record<Variant, ReactNode>`                                                                                                              | -        |
+| `position`     | Position of the toaster on the screen       | `Position` (default: `bottom-right`): `'top-left'`, `'top-right'`, `'top-center'`, `'bottom-left'`, `'bottom-right'` or `'bottom-center'` | -        |
+| `toastOptions` | Options to customize all toasts.            | [`ToastOptions`](/toastOptions)                                                                                                           | -        |
