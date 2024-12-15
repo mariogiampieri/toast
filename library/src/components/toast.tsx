@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type {
   Position,
   ToastIcons,
@@ -27,11 +27,10 @@ interface ToastComponentProps extends ToastPropsWithLoading {
 
 const Toast = (props: ToastComponentProps) => {
   const [status, setStatus] = useState<Variant>(props.variant || 'info');
-
   const [iconColor, setIconColor] = useState<string>(iconsColors[status]);
-
   const [toastText, setToastText] = useState<string>(props.text);
   const [isExiting, setIsExiting] = useState<boolean>(false);
+
   const delayDuration = props.delayDuration || 4000;
 
   const { pauseTimer, resumeTimer } = useTimeout(() => {
@@ -90,7 +89,7 @@ const Toast = (props: ToastComponentProps) => {
     ? props.toastOptions?.icons[status]
     : icons[status];
 
-  const handleCloseToast = () => {
+  const handleCloseToast = useCallback(() => {
     setIsExiting(true);
     const animationDisabled = prefersReducedMotion();
     if (!animationDisabled) {
@@ -102,7 +101,7 @@ const Toast = (props: ToastComponentProps) => {
     } else if (props.onClose) {
       props.onClose();
     }
-  };
+  }, [props]);
 
   const handleMouseLeave = () => {
     resumeTimer();
@@ -154,7 +153,9 @@ const Toast = (props: ToastComponentProps) => {
           }
           setToastText(props.options!.success);
           setIconColor(iconsColors.success);
-          props.options?.onSuccess && props.options.onSuccess(data);
+          if (props.options?.onSuccess) {
+            props.options.onSuccess(data);
+          }
         })
         .catch((error) => {
           setStatus('error');
@@ -165,10 +166,19 @@ const Toast = (props: ToastComponentProps) => {
               handleCloseToast();
             }, delayDuration);
           }
-          props.options?.onError && props.options.onError(error);
+          if (props.options?.onError) {
+            props.options.onError(error);
+          }
         });
     }
-  }, [props.options, props.variant]);
+  }, [
+    delayDuration,
+    handleCloseToast,
+    pauseTimer,
+    props.options,
+    props.variant,
+    resumeTimer,
+  ]);
 
   return (
     <div
@@ -244,20 +254,31 @@ const Toast = (props: ToastComponentProps) => {
       <div
         className={
           props.toastOptions?.headless
-            ? props.toastOptions?.classNames?.actions
+            ? props.toastOptions?.classNames?.actions.container
             : 't_actions'
         }
       >
         {props.action && (
           <button
             onClick={props.action.onClick}
-            title={props.action.text ? `${props.action.text}` : 'Action Button'}
+            title={
+              typeof props.action.content === 'string'
+                ? props.action.content
+                : 'Action Button'
+            }
+            className={
+              props.toastOptions?.headless
+                ? props.toastOptions?.classNames?.actions.actionBtn
+                : 't_action'
+            }
           >
-            {props.action.text ?? 'Action'}
+            {props.action.content ??
+              props.toastOptions?.defaultActionContent ??
+              'Action'}
           </button>
         )}
         <button onClick={handleCloseToast} title="Close toast">
-          Close
+          {props.toastOptions?.defaultCloseContent ?? 'Close'}
         </button>
       </div>
     </div>
