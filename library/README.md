@@ -9,7 +9,7 @@
   <p />
   <p>
     <b>
-      An accessible toast library for React.
+      An accessible notification library for React.
     </b>
   </p>
 
@@ -120,13 +120,13 @@ export default function Index() {
 - [x] 🚗 Add `.loading` variant.
 - [x] 📚 Add support for Astro + React.
 - [x] ✨ Export bundled & minified `.css` file.
-- [ ] 🎨 Add rich colors support.
+- [x] 🎨 Add support to customize the default styles for greater flexibility and adaptability.
 
 ## 🤝 Contributing
 
 [`pheralb/toast`](https://github.com/pheralb/toast) is a monorepo built with [Turbo](https://turbo.build/repo) and it uses:
 
-- [**Docs**](https://github.com/pheralb/toast/tree/main/docs): Astro Content Collections, shadcn/ui + Tailwind CSS & MDX.
+- [**Docs**](https://github.com/pheralb/toast/tree/main/docs): Astro 5 with Content Layer, shadcn/ui + Tailwind CSS & MDX.
 - [**Library**](https://github.com/pheralb/toast/tree/main/library): React 18 with tsup + Lightning CSS + Vitest for testing.
 - [**Examples**](https://github.com/pheralb/toast/tree/main/examples): Apps to test the library.
 
