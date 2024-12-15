@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import './styles/globals.css';
 
 export { toast } from './components/toast-functions';
