@@ -29,16 +29,12 @@ export type ToastProps = {
   action?: Action;
 };
 
-export interface LoadingType {
-  promise:
-    | (() => Promise<void>)
-    | Promise<void>
-    | (() => Promise<any>)
-    | Promise<unknown>;
+export interface LoadingType<T = unknown> {
+  promise: (() => Promise<T>) | Promise<T>;
   success: string;
   error: string;
   autoDismiss: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: T) => void;
   onError?: (error: Error) => void;
 }
 
