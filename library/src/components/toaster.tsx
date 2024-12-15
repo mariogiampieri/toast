@@ -62,7 +62,7 @@ export const Toaster = ({
     toasts.length > 0 && (
       <section
         aria-label="Toast Notifications"
-        role="region"
+        role="alert"
         aria-live="polite"
         className={classNames(
           't_toasts',
@@ -91,6 +91,7 @@ export const Toaster = ({
 };
 
 // Export the openToast function:
+// eslint-disable-next-line react-refresh/only-export-components
 export const openToast = (data: ToastPropsWithVariant): void => {
   if (openToastGlobal) {
     openToastGlobal(data);
