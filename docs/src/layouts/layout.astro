@@ -5,7 +5,7 @@ interface Props {
 }
 
 // View Transitions:
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 // Styles:
 import '@/styles/globals.css';
@@ -97,7 +97,7 @@ const { title, description } = Astro.props;
     <title>{title}</title>
 
     <!-- View Transitions -->
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body
     class={cn(
