@@ -1,81 +1,18 @@
-import type { CodeBlockProps } from './examples.types';
 import type { ToastVariant as Variant } from '@pheralb/toast';
 
 import { toast } from '@pheralb/toast';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import JSConfetti from 'js-confetti';
 import {
-  CheckCheckIcon,
   CircleAlertIcon,
   CircleCheckIcon,
-  CopyIcon,
   PartyPopperIcon,
 } from 'lucide-react';
 
 import { Button } from '@/ui/button';
-import { CopyCodeBtnStyles } from '@/ui/copyCodeBtn';
-import { copyToClipboard } from '@/utils';
+import Codeblock from '../codeblock';
 
-const ToastCodeBlock = (props: CodeBlockProps) => {
-  const preRef = useRef<HTMLPreElement>(null);
-  const [isCopied, setIsCopied] = useState<boolean>(false);
-
-  const copyPreContent = async () => {
-    const content = preRef.current?.textContent ?? '';
-    await copyToClipboard(content);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 700);
-  };
-
-  return (
-    <div className="relative">
-      <pre
-        style={{
-          backgroundColor: '#101010',
-          color: '#FFFFFF',
-          margin: '0',
-        }}
-        data-language="ts"
-        data-theme="vesper"
-        ref={preRef}
-      >
-        <code
-          data-language="ts"
-          data-theme="vesper"
-          style={{ display: 'block' }}
-        >
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}>toast.</span>
-            <span style={{ color: 'rgb(255, 199, 153)' }}>{props.value}</span>
-            <span style={{ color: 'rgb(255, 255, 255)' }}>({`{`}</span>
-          </span>
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}> text: </span>
-            <span style={{ color: 'rgb(153, 255, 228)' }}>
-              &apos;A {props.label} toast 🚀&apos;
-            </span>
-            <span style={{ color: 'rgb(255, 255, 255)' }}>,</span>
-          </span>
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}> description: </span>
-            <span style={{ color: 'rgb(153, 255, 228)' }}>
-              &apos;✨ A beautiful toast library for React&apos;
-            </span>
-          </span>
-          <span data-line="">
-            <span style={{ color: 'rgb(255, 255, 255)' }}>{`});`}</span>
-          </span>
-        </code>
-      </pre>
-      <button className={CopyCodeBtnStyles} onClick={copyPreContent}>
-        <span className="sr-only">Copy</span>
-        {isCopied ? <CheckCheckIcon size={16} /> : <CopyIcon size={16} />}
-      </button>
-    </div>
-  );
-};
-
-const ToastVariantExamples = () => {
+export const ToastVariantExamples = () => {
   const [toastVariant, setToastVariant] = useState<string>('success');
   const variants: Variant[] = ['success', 'error', 'warning', 'info'];
 
@@ -98,8 +35,8 @@ const ToastVariantExamples = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-0">
-      <div className="flex items-center space-x-2 overflow-y-auto pb-2">
+    <div className="my-2 flex flex-col space-y-2">
+      <div className="flex items-center space-x-2 overflow-y-auto">
         <Button variant="outline" onClick={() => handleDefault()}>
           default
         </Button>
@@ -113,12 +50,18 @@ const ToastVariantExamples = () => {
           </Button>
         ))}
       </div>
-      <ToastCodeBlock label={toastVariant} value={toastVariant} />
+      <Codeblock
+        code={`toast.${toastVariant}({
+  text: 'A ${toastVariant} toast 🚀'
+  description: '✨ @pheralb/toast'
+});`}
+        lang="typescript"
+      />
     </div>
   );
 };
 
-const ToastActionsExamples = () => {
+export const ToastActionsExamples = () => {
   const handleChangeVariant = () => {
     toast.default({
       text: `A toast with confetti 🎉`,
@@ -147,7 +90,7 @@ const ToastActionsExamples = () => {
 
   return (
     <Button
-      className="mb-2"
+      className="my-2"
       variant="outline"
       onClick={() => handleChangeVariant()}
     >
@@ -157,7 +100,7 @@ const ToastActionsExamples = () => {
   );
 };
 
-const ToastLoadingExample = () => {
+export const ToastLoadingExample = () => {
   const runFunction = async () => {
     await new Promise((resolve) => {
       setTimeout(() => {
@@ -211,25 +154,15 @@ const ToastLoadingExample = () => {
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      <Button
-        className="mb-2"
-        variant="outline"
-        onClick={() => handleToastLoading(true)}
-      >
+    <div className="my-2 flex items-center space-x-2">
+      <Button variant="outline" onClick={() => handleToastLoading(true)}>
         <CircleCheckIcon size={16} />
         <span>Show a Loading Toast (Success)</span>
       </Button>
-      <Button
-        className="mb-2"
-        variant="outline"
-        onClick={() => handleToastLoading(false)}
-      >
+      <Button variant="outline" onClick={() => handleToastLoading(false)}>
         <CircleAlertIcon size={16} />
         <span>Show a Loading Toast (Error)</span>
       </Button>
     </div>
   );
 };
-
-export { ToastVariantExamples, ToastActionsExamples, ToastLoadingExample };

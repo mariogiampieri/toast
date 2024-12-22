@@ -1,12 +1,12 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# Astro
-.astro
-
 # Dependencies
 node_modules
-.pnp
-.pnp.js
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # Local env files
 .env
@@ -34,6 +34,19 @@ dist
 # Remix
 /.cache
 
+# Next.js
+/.next/
+/out/
+
+# Astro
+.astro
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
 # Debug
 npm-debug.log*
 yarn-debug.log*
@@ -42,3 +55,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

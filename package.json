@@ -3,6 +3,10 @@
   "author": "@pheralb_",
   "private": true,
   "license": "MIT",
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -21,9 +25,5 @@
     "prettier": "3.3.2",
     "prettier-plugin-tailwindcss": "0.6.5",
     "turbo": "latest"
-  },
-  "packageManager": "pnpm@8.9.0",
-  "engines": {
-    "node": ">=20"
   }
 }

@@ -6,7 +6,18 @@ import {
   ArrowUpRight,
   BoxIcon,
   HeartIcon,
+  PencilIcon,
 } from 'lucide-react';
+
+const { pathname } = Astro.url;
+
+const getUrl = () => {
+  const sourcePage = 'https://github.com/pheralb/toast/blob/main/docs/src/';
+  if (pathname === '/') {
+    return `${sourcePage}pages/index.mdx`;
+  }
+  return `${sourcePage}content/docs/${pathname}.mdx`;
+};
 
 const iconSize = 14;
 const strokeIcon = 1.4;
@@ -45,6 +56,19 @@ const sidebarFooterClasses = cn(
       height={iconSize}
     />
     <span>Found a bug?</span>
+    <ArrowUpRight height={12} strokeWidth={strokeIcon} />
+  </a>
+  <a
+    href={`${getUrl()}`}
+    target="_blank"
+    rel="noreferrer"
+    class={sidebarFooterClasses}
+  >
+    <PencilIcon
+      className="mr-1 group-hover:stroke-indigo-600 dark:group-hover:stroke-indigo-500"
+      height={iconSize}
+    />
+    <span>Edit this page</span>
     <ArrowUpRight height={12} strokeWidth={strokeIcon} />
   </a>
   <a

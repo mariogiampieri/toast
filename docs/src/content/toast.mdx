@@ -1,6 +1,6 @@
 ---
 title: 'Toast'
-description: 'Use toast to create a toast from anywhere in your React application.'
+description: 'Use toast to create a toast from anywhere in your React application'
 category: 'API'
 ---
 
@@ -8,23 +8,27 @@ import {
   ToastVariantExamples,
   ToastActionsExamples,
   ToastLoadingExample,
-} from '../../components/examples/toast';
+} from '@/components/examples/toast';
 
 > 💡 Make sure you add the [`<Toaster />`](/toaster) provider to your app first.
 
-1. Import the `toast` function:
-
 ```tsx
 import { toast } from '@pheralb/toast';
+
+toast.default({
+  text: `Hello ✨`,
+});
 ```
 
-2. Render a toast:
+## toast.variant
 
-- `toast.variant`: Show a toast with a specific variant:
+Show a toast with a specific variant:
 
 <ToastVariantExamples client:only="react" />
 
-- `toast.variant` with `action`: Show a _Action_ button and execute a custom function when clicked:
+## toast.variant with action
+
+Show a button and execute a custom function when clicked. The default text for the button is `Action`:
 
 <ToastActionsExamples client:only="react" />
 
@@ -32,7 +36,7 @@ import { toast } from '@pheralb/toast';
 toast.default({
   text: `A toast with 👀 action button`,
   action: {
-    label: 'Action', // Button label
+    content: 'Action', // Button label
     onClick: () => {
       // Do something
     },
@@ -40,7 +44,9 @@ toast.default({
 });
 ```
 
-- `toast.loading`: Show a toast with loading state and will update automatically after the promise resolves or fails:
+## toast.loading
+
+Show a toast with loading state and will update automatically after the promise resolves or fails:
 
 <ToastLoadingExample client:only="react" />
 
@@ -99,6 +105,17 @@ toast.loading({
 });
 ```
 
+## Custom Icon
+
+You can use a custom icon for the toast using `icon` property:
+
+```tsx
+toast.default({
+  text: 'Party popper!',
+  icon: <PartyPopperIcon width={18} height={18} />,
+});
+```
+
 ## API Reference
 
 The `toast.variant` function accepts the following options:
@@ -109,5 +126,6 @@ The `toast.variant` function accepts the following options:
 | `description`   | Toast's description                           | `string`                                                                      | -        |
 | `icon`          | Icon to display in the toast                  | `ReactNode`                                                                   | -        |
 | `delayDuration` | Duration before the toast disappears          | `number` (default: `4000`)                                                    | -        |
+| `variant`       | Variant of the toast                          | `Variant`: `info`, `success`, `warning`, `error` or `loading`                 | -        |
 | `theme`         | Theme of the toast                            | `Theme` (default: `system`): `light`, `dark` or `system`                      | -        |
 | `action`        | Show a _Action_ button and execute a function | `label` (default text: `action`) & `onClick`: `() => void` or `Promise<void>` | -        |

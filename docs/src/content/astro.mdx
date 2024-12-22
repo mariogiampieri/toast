@@ -4,7 +4,11 @@ description: 'How to use the library with Astro'
 category: 'Framework guides'
 ---
 
-1. Create a new Astro project:
+> 💡 This guide shows how to use the library with [Astro](https://astro.build/) + [@astro/react](https://docs.astro.build/en/guides/integrations-guide/react/)
+
+## Create a new Astro project
+
+1. Run the following command:
 
 ```bash
 npm create astro@latest
@@ -46,13 +50,15 @@ npm create astro@latest
 npx astro add react
 ```
 
-4. Install the library:
+## Add the library
+
+1. Run the following command:
 
 ```bash
 npm install @pheralb/toast
 ```
 
-5. Add the [`Toaster`](/toaster) to the `layout.astro` file:
+2. Add the [`Toaster`](/toaster) to the `layout.astro` file:
 
 > 💡 Add [`client:load`](https://docs.astro.build/es/reference/directives-reference/#clientload) directive to the `Toaster` component.
 
@@ -86,7 +92,7 @@ const { title } = Astro.props;
 </html>
 ```
 
-6. Create a example component with a button to trigger a toast message:
+3. Create a example component with a button to trigger a toast message:
 
 ```tsx
 // 📄 components/showToast.tsx
@@ -110,7 +116,7 @@ const ShowToast = () => {
 export default ShowToast;
 ```
 
-7. Import the `ShowToast` component in the `index.astro` file:
+4. Import the `ShowToast` component in the `index.astro` file:
 
 > 💡 Add [`client:load`](https://docs.astro.build/es/reference/directives-reference/#clientload) directive to the `ShowToast` component.
 
@@ -128,6 +134,22 @@ import ShowToast from '../components/showToast';
     <ShowToast client:load />
   </main>
 </Layout>
+```
+
+## Add the styles (optional)
+
+The library exports a CSS file that you can include in your project. Only use in cases where the toast styles do not render correctly:
+
+> 💡 Add the following code to the **global `layout.astro` file**.
+
+```js
+// 📄 layout.astro
+
+---
+import '@pheralb/toast/dist/styles.css';
+---
+
+<h2>hello</h2>
 ```
 
 ✨ Ready.

@@ -5,10 +5,13 @@ interface Props {
 }
 
 // View Transitions:
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
-// Styles:
+// Docs + Library Styles:
 import '@/styles/globals.css';
+import '../../../library/src/styles/globals.css';
+
+// Utils:
 import { cn } from '@/utils';
 
 // Providers:
@@ -97,22 +100,23 @@ const { title, description } = Astro.props;
     <title>{title}</title>
 
     <!-- View Transitions -->
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body
     class={cn(
       'font-sans antialiased',
       'bg-neutral-50 dark:bg-neutral-900',
       'text-neutral-900 dark:text-neutral-50',
+      'selection:bg-neutral-200 dark:selection:bg-neutral-800',
     )}
   >
     <Header />
-    <main class="container w-full max-w-7xl">
+    <main class="container relative w-full max-w-7xl">
       <aside class="hidden md:block">
         <Sidebar />
       </aside>
       <slot />
     </main>
-    <ToasterPlayground toastFont="font-sans" client:only="react" />
+    <ToasterPlayground client:only="react" />
   </body>
 </html>

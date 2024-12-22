@@ -1,22 +1,15 @@
-import { useEffect, useState, type FC } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type {
   Position,
+  ToastIcons,
+  ToastOptions,
   ToastPropsWithLoading,
   Variant,
 } from '../types/toast.types';
-import '../styles/toast-component.css';
 
 import { Error, Info, Loading, Success, Warning } from '../icons';
 import { useTimeout } from '../hooks/useTimeout';
 import { classNames, prefersReducedMotion } from '../utils';
-
-const icons: Record<Variant, FC<React.SVGProps<SVGSVGElement>>> = {
-  success: Success,
-  error: Error,
-  warning: Warning,
-  info: Info,
-  loading: Loading,
-};
 
 const iconsColors: Record<Variant, string> = {
   success: '#22c55e',
@@ -28,6 +21,7 @@ const iconsColors: Record<Variant, string> = {
 
 interface ToastComponentProps extends ToastPropsWithLoading {
   toastPosition: Position;
+  toastOptions?: ToastOptions;
   onClose: () => void;
 }
 
@@ -35,15 +29,67 @@ const Toast = (props: ToastComponentProps) => {
   const [status, setStatus] = useState<Variant>(props.variant || 'info');
   const [iconColor, setIconColor] = useState<string>(iconsColors[status]);
   const [toastText, setToastText] = useState<string>(props.text);
-  const IconComponent = icons[status];
   const [isExiting, setIsExiting] = useState<boolean>(false);
+
   const delayDuration = props.delayDuration || 4000;
 
   const { pauseTimer, resumeTimer } = useTimeout(() => {
     handleCloseToast();
   }, delayDuration);
 
-  const handleCloseToast = () => {
+  const iconClass = classNames(
+    't_icon',
+    props.variant === 'loading' && status === 'loading' ? 't_loading' : '',
+  );
+
+  const icons: ToastIcons = {
+    success: (
+      <Success
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    error: (
+      <Error
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    warning: (
+      <Warning
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    info: (
+      <Info
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+    loading: (
+      <Loading
+        width={18}
+        height={18}
+        style={{ fill: iconColor }}
+        className={iconClass}
+      />
+    ),
+  };
+
+  const IconComponent = props.toastOptions?.icons
+    ? props.toastOptions?.icons[status]
+    : icons[status];
+
+  const handleCloseToast = useCallback(() => {
     setIsExiting(true);
     const animationDisabled = prefersReducedMotion();
     if (!animationDisabled) {
@@ -55,7 +101,7 @@ const Toast = (props: ToastComponentProps) => {
     } else if (props.onClose) {
       props.onClose();
     }
-  };
+  }, [props]);
 
   const handleMouseLeave = () => {
     resumeTimer();
@@ -107,7 +153,9 @@ const Toast = (props: ToastComponentProps) => {
           }
           setToastText(props.options!.success);
           setIconColor(iconsColors.success);
-          props.options?.onSuccess && props.options.onSuccess(data);
+          if (props.options?.onSuccess) {
+            props.options.onSuccess(data);
+          }
         })
         .catch((error) => {
           setStatus('error');
@@ -118,10 +166,19 @@ const Toast = (props: ToastComponentProps) => {
               handleCloseToast();
             }, delayDuration);
           }
-          props.options?.onError && props.options.onError(error);
+          if (props.options?.onError) {
+            props.options.onError(error);
+          }
         });
     }
-  }, [props.options, props.variant]);
+  }, [
+    delayDuration,
+    handleCloseToast,
+    pauseTimer,
+    props.options,
+    props.variant,
+    resumeTimer,
+  ]);
 
   return (
     <div
@@ -130,51 +187,98 @@ const Toast = (props: ToastComponentProps) => {
       aria-describedby={`toast-description-${props.id}`}
       title={props.text}
       className={classNames(
-        prefersReducedMotion() ? '' : animationClass,
-        props.theme === 'system' ? 't_system-theme' : '',
-        props.theme === 'dark' ? 't_dark-theme' : '',
-        props.theme === 'light' ? 't_light-theme' : '',
-        't_global',
+        !props.toastOptions?.headless && prefersReducedMotion()
+          ? ''
+          : animationClass,
+        !props.toastOptions?.headless && props.theme === 'system'
+          ? 't_system-theme'
+          : '',
+        !props.toastOptions?.headless && props.theme === 'dark'
+          ? 't_dark-theme'
+          : '',
+        !props.toastOptions?.headless && props.theme === 'light'
+          ? 't_light-theme'
+          : '',
+        props.toastOptions?.headless
+          ? props.toastOptions?.classNames?.toast
+          : 't_global',
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleMouseEnter}
       onBlur={handleMouseLeave}
     >
-      <div className="t_container">
+      <div
+        className={
+          props.toastOptions?.headless
+            ? props.toastOptions?.classNames?.container
+            : 't_container'
+        }
+      >
         {props.variant && !props.icon ? (
-          <IconComponent
-            width={18}
-            height={18}
-            style={{ fill: iconColor }}
-            className={classNames(
-              't_icon',
-              props.variant === 'loading' && status === 'loading'
-                ? 't_loading'
-                : '',
-            )}
-          />
+          <div
+            className={
+              props.toastOptions?.headless
+                ? props.toastOptions?.classNames?.icon
+                : 't_icon'
+            }
+          >
+            {IconComponent}
+          </div>
         ) : (
-          props.icon && <div className="t_icon">{props.icon}</div>
+          props.icon && (
+            <div
+              className={
+                props.toastOptions?.headless
+                  ? props.toastOptions?.classNames?.icon
+                  : 't_icon'
+              }
+            >
+              {props.icon}
+            </div>
+          )
         )}
-        <div className="t_content">
+        <div
+          className={
+            props.toastOptions?.headless
+              ? props.toastOptions?.classNames?.content
+              : 't_content'
+          }
+        >
           <p id={`toast-title-${props.id}`}>{toastText}</p>
           {props.description && (
             <p id={`toast-description-${props.id}`}>{props.description}</p>
           )}
         </div>
       </div>
-      <div className="t_actions">
+      <div
+        className={
+          props.toastOptions?.headless
+            ? props.toastOptions?.classNames?.actions.container
+            : 't_actions'
+        }
+      >
         {props.action && (
           <button
             onClick={props.action.onClick}
-            title={props.action.text ? `${props.action.text}` : 'Action Button'}
+            title={
+              typeof props.action.content === 'string'
+                ? props.action.content
+                : 'Action Button'
+            }
+            className={
+              props.toastOptions?.headless
+                ? props.toastOptions?.classNames?.actions.actionBtn
+                : 't_action'
+            }
           >
-            {props.action.text ?? 'Action'}
+            {props.action.content ??
+              props.toastOptions?.defaultActionContent ??
+              'Action'}
           </button>
         )}
         <button onClick={handleCloseToast} title="Close toast">
-          Close
+          {props.toastOptions?.defaultCloseContent ?? 'Close'}
         </button>
       </div>
     </div>
