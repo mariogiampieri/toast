@@ -28,7 +28,7 @@ export const SparkleCard = ({
       {useTopDivider && <div className="h-4 border-b" />}
       <section
         className={cn(
-          'p-4 shadow-sm sm:p-12',
+          'p-3 shadow-sm sm:p-12',
           sparklePositions.length > 0 && 'relative',
           className,
         )}
