@@ -1,6 +1,6 @@
 ---
 title: 'Toast Options'
-description: 'The <Toaster /> component is used to show toasts in your application'
+description: 'Options to customize the toast component.'
 category: 'Customization'
 ---
 
@@ -58,12 +58,39 @@ You can change this value using the `font` property. In this case, we are using 
 
 > 💡 To modify the icon of a **single** toast: [`toast - Custom Icon`](/toast#custom-icon)
 
-## Styling
+## Actions buttons
+
+- `defaultActionContent`: Default content for the action button. It can be a string or a `ReactNode`.
+
+```tsx
+<Toaster
+  toastOptions={{
+    defaultActionContent: 'Close me',
+  }}
+/>
+```
+
+> 💡 To modify the action button of a **single** toast: [`toast - toast.variant with action`](/toast#toastvariant-with-action)
+
+- `defaultCloseContent`: Default content for the close button. It can be a string or a `ReactNode`.
+
+```tsx
+<Toaster
+  toastOptions={{
+    defaultCloseContent: 'Close',
+  }}
+/>
+```
+
+## Styling (experimental)
+
+> ⚠️ This feature is experimental and may change in the future. Use it with caution.
 
 To customize toasts with personalized styles:
 
 1. Activate the `headless` property.
-2. Use the `classNames` property.
+2. It's recommended to use [`defaultActionContent` and `defaultCloseContent`](#actions-buttons) to modify the content of the buttons (add text or React components).
+3. Use the `classNames` property.
 
 <ToastCustomOptions client:load />
 
@@ -71,12 +98,14 @@ To customize toasts with personalized styles:
 
 - `toastOptions` from [`<Toaster />`](/toaster#api-reference) accepts the following properties:
 
-| Property     | Description                                                     | Type                         | Required |
-| ------------ | --------------------------------------------------------------- | ---------------------------- | -------- |
-| `font`       | Font for all toasts                                             | `string`                     | -        |
-| `icons`      | Icons for all toasts                                            | `Record<Variant, ReactNode>` | -        |
-| `headless`   | Disable all default styles. It works together with `classNames` | `boolean`                    | -        |
-| `classNames` | Custom styles for all toasts                                    | `ToastClassnames`            | -        |
+| Property               | Description                                                     | Type                         | Required |
+| ---------------------- | --------------------------------------------------------------- | ---------------------------- | -------- |
+| `font`                 | Font for all toasts                                             | `string`                     | -        |
+| `icons`                | Icons for all toasts                                            | `Record<Variant, ReactNode>` | -        |
+| `defaultActionContent` | Default content for the action button                           | `string` or `ReactNode`      | -        |
+| `defaultCloseContent`  | Default content for the close button                            | `string` or `ReactNode`      | -        |
+| `headless`             | Disable all default styles. It works together with `classNames` | `boolean`                    | -        |
+| `classNames`           | Custom styles for all toasts                                    | `ToastClassnames`            | -        |
 
 - `classNames` from `toastOptions` accepts the following properties:
 
