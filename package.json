@@ -21,9 +21,9 @@
     "release": "turbo run build --filter=@pheralb/toast && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.6",
-    "prettier": "3.3.2",
-    "prettier-plugin-tailwindcss": "0.6.5",
+    "@changesets/cli": "2.27.11",
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "0.6.9",
     "turbo": "latest"
   }
 }
