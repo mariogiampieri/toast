@@ -33,7 +33,7 @@ const Toast = (props: ToastComponentProps) => {
 
   const delayDuration = props.delayDuration || 4000;
 
-  const { pauseTimer, resumeTimer } = useTimeout(() => {
+  const { pause, resume } = useTimeout(() => {
     handleCloseToast();
   }, delayDuration);
 
@@ -104,11 +104,11 @@ const Toast = (props: ToastComponentProps) => {
   }, [props]);
 
   const handleMouseLeave = () => {
-    resumeTimer();
+    resume();
   };
 
   const handleMouseEnter = () => {
-    pauseTimer();
+    pause();
   };
 
   const ANIMATION_ENTER_MAP: Record<Position, string> = {
@@ -135,7 +135,7 @@ const Toast = (props: ToastComponentProps) => {
 
   useEffect(() => {
     if (props.variant === 'loading' && props.options) {
-      pauseTimer();
+      pause();
 
       const executePromise =
         typeof props.options.promise === 'function'
@@ -144,7 +144,7 @@ const Toast = (props: ToastComponentProps) => {
 
       executePromise
         .then((data) => {
-          resumeTimer();
+          resume();
           setStatus('success');
           if (props.options!.autoDismiss) {
             setTimeout(() => {
@@ -174,10 +174,10 @@ const Toast = (props: ToastComponentProps) => {
   }, [
     delayDuration,
     handleCloseToast,
-    pauseTimer,
+    pause,
     props.options,
     props.variant,
-    resumeTimer,
+    resume,
   ]);
 
   return (
