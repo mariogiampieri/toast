@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global Layout Properties */
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
 /* Light/Dark mode for Shiki */
 /* https://shiki.style/guide/dual-themes#light-dark-dual-themes */
 
