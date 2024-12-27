@@ -8,8 +8,16 @@ import {
   remarkStructure,
 } from "fumadocs-core/mdx-plugins";
 import GithubSlugger from "github-slugger";
-import rehypePrettyCode from "rehype-pretty-code";
-import { rehypePrettyOptions } from "./src/mdx/rehypePrettyOptions";
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+
+// Rehype Shiki Options:
+const rehypePrettyOptions: Options = {
+  theme: {
+    dark: "github-dark-dimmed",
+    light: "github-light",
+  },
+  keepBackground: false,
+};
 
 const docs = defineCollection({
   name: "docs",
