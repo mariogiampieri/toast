@@ -1,10 +1,11 @@
+import type { Metadata } from "next";
+
 import { allDocs } from "content-collections";
 import { notFound } from "next/navigation";
 import { MDX } from "@/mdx/components";
 
 import Article from "@/components/article";
 import TableOfContents from "@/components/layout/toc";
-import { Metadata } from "next";
 
 const indexPage = "index";
 

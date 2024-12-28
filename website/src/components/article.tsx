@@ -9,10 +9,10 @@ const Article = (props: ArticleProps) => {
   return (
     <article
       className={cn(
-        "py-6",
+        "py-8",
         "prose prose-neutral dark:prose-invert",
         "prose-headings:font-bold prose-headings:font-headings prose-headings:tracking-tight prose-headings:scroll-mt-24",
-        "prose-h1:mb-0 prose-h2:mb-4 prose-h2:font-semibold",
+        "prose-h1:mb-0 prose-h2:mb-5 prose-h2:font-semibold",
         "prose-a:underline-offset-[4px] prose-a:decoration-solid dark:prose-a:decoration-neutral-500 prose-a:decoration-neutral-400",
         "prose-figure:my-0 prose-p:mb-2 prose-p:text-pretty",
         "prose-ol:mb-0",

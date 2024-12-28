@@ -2,8 +2,9 @@ import { SidebarRoutes } from "@/docs.config";
 import { cn } from "@/utils/cn";
 
 import SidebarItem from "./sidebarItem";
+import Footer from "./footer/footer";
 
-const Sidebar = () => {
+const Sidebar = async () => {
   return (
     <nav
       className={cn(
@@ -27,7 +28,7 @@ const Sidebar = () => {
           </section>
         ))}
       </div>
-      {/* <SidebarFooter /> */}
+      <Footer />
     </nav>
   );
 };

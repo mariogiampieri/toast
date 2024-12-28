@@ -3,7 +3,7 @@
 import { toast } from "@pheralb/toast";
 import { SparkleCard } from "./sparkleCard";
 
-import { Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Github } from "@/ui/icons";
 import ExternalLink from "@/ui/externalLink";
 import { Button, buttonVariants } from "@/ui/button";
@@ -42,11 +42,14 @@ const Hero = () => {
           href="https://github.com/pheralb/toast"
           className={buttonVariants({
             variant: "outline",
-            className: "w-full md:w-40",
+            className: "w-full no-underline md:w-44",
           })}
         >
-          <Github height={14} />
-          <span>View on GitHub</span>
+          <div className="flex items-center space-x-2">
+            <Github height={14} />
+            <span>View on GitHub</span>
+          </div>
+          <ArrowUpRight size={12} />
         </ExternalLink>
       </div>
     </SparkleCard>
