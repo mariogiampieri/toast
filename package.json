@@ -10,7 +10,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "dev:docs": "turbo dev --filter=@pheralb/toast-docs",
+    "dev:docs": "turbo dev --filter=@pheralb/toast-website",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
