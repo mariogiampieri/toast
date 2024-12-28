@@ -7,7 +7,6 @@ import { useDocsStore } from "@/store";
 import Codeblock from "@/components/codeblock/client";
 
 import { Button } from "@/ui/button";
-import { TailwindCSS } from "@/ui/icons";
 
 const ToastCustomOptions = () => {
   const { applyCustomTheme, setApplyCustomTheme } = useDocsStore();
@@ -95,8 +94,6 @@ const ToastCustomOptions = () => {
         </Button>
       </div>
       <Codeblock
-        icon={<TailwindCSS width={20} height={20} />}
-        iconText="Styled with Tailwind CSS"
         code={`<Toaster
   toastOptions={{
     headless: true,
