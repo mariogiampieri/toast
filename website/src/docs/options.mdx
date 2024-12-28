@@ -41,6 +41,8 @@ You can change this value using the `font` property. In this case, we are using 
 `@pheralb/toast` use [Phosphor Icons](https://phosphoricons.com/) by default. You can change the default icons for all toasts using `icons` property:
 
 ```tsx
+import { Info, CircleX, CircleAlert, CircleCheck, Loader } from "lucide-react";
+
 <Toaster
   toastOptions={{
     icons: {
@@ -51,7 +53,7 @@ You can change this value using the `font` property. In this case, we are using 
       loading: <Loader className="animate-spin text-gray-500" />,
     },
   }}
-/>
+/>;
 ```
 
 > 💡 To modify the icon of a **single** toast: [`toast - Custom Icon`](/toast#custom-icon)
