@@ -17,6 +17,7 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "1.0.4",
+    "fast-npm-meta": "0.2.2",
     "fumadocs-core": "14.6.4",
     "github-slugger": "2.0.0",
     "js-confetti": "0.12.0",
