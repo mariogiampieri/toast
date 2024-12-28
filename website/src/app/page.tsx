@@ -4,9 +4,25 @@ import { MDX } from "@/mdx/components";
 
 import Article from "@/components/article";
 import TableOfContents from "@/components/layout/toc";
+import { Metadata } from "next";
+
+const indexPage = "index";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const document = allDocs.find((post) => post.slug === indexPage);
+
+  if (!document) {
+    return notFound();
+  }
+
+  return {
+    title: `${document.title} - @pheralb/toast`,
+    description: document.description,
+  };
+}
 
 const Page = () => {
-  const document = allDocs.find((post) => post.slug === "index");
+  const document = allDocs.find((post) => post.slug === indexPage);
 
   if (!document) {
     return notFound();
