@@ -34,7 +34,7 @@ const Positions = () => {
   };
   return (
     <div className="flex flex-col space-y-2">
-      <div className="custom-scrollbar flex items-center space-x-2 overflow-y-auto">
+      <div className="custom-scrollbar flex items-center space-x-1.5 overflow-y-auto">
         <Button
           variant="outline"
           className={toastPosition === "top-left" ? activeBtn : ""}
@@ -109,7 +109,7 @@ const ThemeExamples = () => {
   return (
     <div className="flex flex-col space-y-2">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1.5">
           <Button
             variant="outline"
             className={toastTheme === "light" ? activeBtn : ""}

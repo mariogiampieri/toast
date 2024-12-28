@@ -82,7 +82,7 @@ export default function RootLayout({
             <aside className="hidden md:block">
               <Sidebar />
             </aside>
-            <div className="relative ml-0 gap-0 md:ml-60 lg:gap-10 xl:grid xl:grid-cols-[1fr,150px]">
+            <div className="relative ml-0 gap-0 md:ml-[250px] lg:gap-10 xl:grid xl:grid-cols-[1fr,150px]">
               {children}
             </div>
           </main>

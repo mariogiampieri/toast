@@ -57,7 +57,7 @@ export const ToastVariantExamples = () => {
   text: 'A ${toastVariant} toast 🚀'
   description: '✨ @pheralb/toast'
 });`}
-        lang="typescript"
+        lang="tsx"
       />
     </div>
   );
