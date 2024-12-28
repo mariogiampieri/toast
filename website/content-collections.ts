@@ -9,16 +9,21 @@ import {
 } from "fumadocs-core/mdx-plugins";
 import GithubSlugger from "github-slugger";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+import { visit } from "unist-util-visit";
 
 // Rehype Shiki Options:
 const rehypePrettyOptions: Options = {
   theme: {
-    dark: "github-dark-dimmed",
+    dark: "github-dark",
     light: "github-light",
   },
   keepBackground: false,
 };
 
+// Domain:
+const domain = "toast.pheralb.dev";
+
+// Docs Collection:
 const docs = defineCollection({
   name: "docs",
   directory: "src/docs",
@@ -31,7 +36,48 @@ const docs = defineCollection({
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
       remarkPlugins: [remarkGfm, remarkHeading, remarkStructure],
-      rehypePlugins: [[rehypePrettyCode, rehypePrettyOptions]],
+      rehypePlugins: [
+        // (1a) Add rawstring to pre element, to be used in the copy button:
+        () => (tree) => {
+          visit(tree, (node) => {
+            if (node?.type === "element" && node?.tagName === "pre") {
+              const [codeEl] = node.children;
+              if (codeEl.tagName !== "code") return;
+              node.rawstring = codeEl.children?.[0].value;
+            }
+          });
+        },
+        // (1b) Render Code Blocks with Rehype Pretty Code:
+        [rehypePrettyCode, rehypePrettyOptions],
+        // (2) Add rawstring to pre element, to be used in the copy button:
+        () => (tree) => {
+          visit(tree, (node) => {
+            if (node?.type === "element" && node?.tagName === "figure") {
+              if (!("data-rehype-pretty-code-figure" in node.properties)) {
+                return;
+              }
+              const preElement = node.children.at(-1);
+              if (preElement.tagName !== "pre") {
+                return;
+              }
+              preElement.properties["rawstring"] = node.rawstring;
+            }
+          });
+        },
+        // Open External Links in New Tab:
+        () => (tree) => {
+          visit(tree, "element", (e) => {
+            if (
+              e.tagName === "a" &&
+              e.properties?.href &&
+              e.properties.href.toString().startsWith("http") &&
+              !e.properties.href.toString().includes(domain)
+            ) {
+              e.properties!["target"] = "_blank";
+            }
+          });
+        },
+      ],
     });
     const slugger = new GithubSlugger();
     const regXHeader = /\n(?<flag>#+)\s+(?<content>.+)/g;
