@@ -26,7 +26,7 @@ const CopyToClipboardBtn = (props: CopyToClipboardBtnProps) => {
 
   return (
     <button
-      onClick={handleCopy}
+      onClick={() => handleCopy()}
       className="text-neutral-500 hover:text-neutral-600 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300"
     >
       <CopyIcon size={12} />
