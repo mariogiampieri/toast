@@ -1,4 +1,4 @@
-import { Js, Reactjs, Shell, TypeScript } from "@react-symbols/icons";
+import { Js, Reactts, Reactjs, Shell, TypeScript } from "@react-symbols/icons";
 
 export const Languages = [
   {
@@ -6,8 +6,12 @@ export const Languages = [
     icon: Shell,
   },
   {
-    name: "tsx",
+    name: "jsx",
     icon: Reactjs,
+  },
+  {
+    name: "tsx",
+    icon: Reactts,
   },
   {
     name: "ts",

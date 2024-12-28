@@ -5,18 +5,17 @@ import CopyToClipboardBtn from "./copyToClipboard";
 import { Languages } from "./languages";
 
 interface PreProps extends HTMLProps<HTMLPreElement> {
-  __rawString__?: string;
+  rawstring?: string;
   ["data-language"]?: string;
 }
 
 const CodeblockMDX = (props: PreProps) => {
   const {
     children,
-    __rawString__ = "",
+    rawstring = "",
     ["data-language"]: dataLanguage = "Shell",
   } = props;
   const selectedLanguage = Languages.find((lang) => lang.name === dataLanguage);
-
   return (
     <div className="relative">
       <div className="flex items-center justify-between rounded-t-md border-l border-r border-t border-neutral-200 bg-neutral-100 px-1.5 py-1 dark:border-neutral-800 dark:bg-neutral-800/40">
@@ -30,7 +29,7 @@ const CodeblockMDX = (props: PreProps) => {
             {dataLanguage}
           </span>
         </div>
-        <CopyToClipboardBtn content={__rawString__} />
+        <CopyToClipboardBtn content={rawstring} />
       </div>
       <pre className="overflow-x-auto rounded-t-none bg-transparent" {...props}>
         {children}
