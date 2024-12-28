@@ -5,11 +5,11 @@ import { MDX } from "@/mdx/components";
 import Article from "@/components/article";
 import TableOfContents from "@/components/layout/toc";
 
-interface DocPageProps {
-  params: { slug: string };
-}
-
-export default async function DocPage({ params }: DocPageProps) {
+export default async function DocPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const document = allDocs.find((post) => post.slug === slug);
 
