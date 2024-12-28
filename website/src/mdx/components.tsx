@@ -2,6 +2,8 @@ import { useMDXComponent } from "@content-collections/mdx/react";
 
 // Global Components:
 import Hero from "@/components/hero";
+import InstallLibrary from "@/components/installLibrary";
+import FrameworkGuidesComponent from "@/components/frameworkGuides";
 
 // Playground Components:
 import ToastCustomOptions from "@/components/playground/toastCustomOptions";
@@ -24,6 +26,8 @@ export function MDX(props: MDXComponentsProps) {
     <Component
       components={{
         pre: (props) => <CodeblockMDX {...props} />,
+        InstallLibrary,
+        FrameworkGuidesComponent,
         Hero,
         Positions,
         ThemeExamples,
