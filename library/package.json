@@ -2,6 +2,7 @@
   "name": "@pheralb/toast",
   "version": "0.3.0",
   "author": "@pheralb_",
+  "description": "A lightweight, customizable, and dependency-free notification library for React.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pheralb/toast.git"
