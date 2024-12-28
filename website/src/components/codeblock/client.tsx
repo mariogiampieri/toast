@@ -25,6 +25,7 @@ const CodeblockClient = ({
   icon,
 }: CodeHighlightProps) => {
   const [highlightedCode, setHighlightedCode] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const getHighlighter = makeSingletonHighlighter(createHighlighter);
 
   useEffect(() => {
@@ -45,9 +46,10 @@ const CodeblockClient = ({
       } catch (error) {
         console.error("Error highlighting code:", error);
         setHighlightedCode(code);
+      } finally {
+        setIsLoading(false);
       }
     }
-
     highlightCode();
   }, [code, getHighlighter, lang]);
 
@@ -60,10 +62,14 @@ const CodeblockClient = ({
         </div>
         <CopyToClipboardBtn content={code} />
       </div>
-      <div
-        className="overflow-y-auto bg-transparent"
-        dangerouslySetInnerHTML={{ __html: highlightedCode }}
-      />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div
+          className="overflow-y-auto bg-transparent"
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
+      )}
     </div>
   );
 };
