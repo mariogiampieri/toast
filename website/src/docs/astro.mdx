@@ -1,7 +1,7 @@
 ---
-title: 'Usage with Astro'
-description: 'How to use the library with Astro'
-category: 'Framework guides'
+title: "Usage with Astro"
+description: "How to use the library with Astro"
+category: "Framework guides"
 ---
 
 > 💡 This guide shows how to use the library with [Astro](https://astro.build/) + [@astro/react](https://docs.astro.build/en/guides/integrations-guide/react/)
@@ -54,9 +54,7 @@ npx astro add react
 
 1. Run the following command:
 
-```bash
-npm install @pheralb/toast
-```
+<InstallLibrary />
 
 2. Add the [`Toaster`](/toaster) to the `layout.astro` file:
 
@@ -97,12 +95,12 @@ const { title } = Astro.props;
 ```tsx
 // 📄 components/showToast.tsx
 
-import { toast } from '@pheralb/toast';
+import { toast } from "@pheralb/toast";
 
 const ShowToast = () => {
   const handleClick = () => {
     toast.default({
-      text: '✨ @pheralb/toast',
+      text: "✨ @pheralb/toast",
     });
   };
 

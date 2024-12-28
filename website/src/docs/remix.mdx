@@ -1,7 +1,7 @@
 ---
-title: 'Usage with Remix'
-description: 'How to use the library with Remix'
-category: 'Framework guides'
+title: "Usage with Remix"
+description: "How to use the library with Remix"
+category: "Framework guides"
 ---
 
 1. Create a new Remix project:
@@ -29,16 +29,14 @@ npx create-remix@latest
 
 3. Install the library:
 
-```bash
-npm install @pheralb/toast
-```
+<InstallLibrary />
 
 4. Add the [`Toaster`](/toaster) to the `root.tsx` file:
 
 ```tsx
 // 📃 root.tsx
 
-import { Toaster } from '@pheralb/toast';
+import { Toaster } from "@pheralb/toast";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -69,7 +67,7 @@ export default function App() {
 ```tsx
 // 📃 index.tsx
 
-import { toast } from '@pheralb/toast';
+import { toast } from "@pheralb/toast";
 
 export default function Index() {
   return (
@@ -78,7 +76,7 @@ export default function Index() {
       <button
         onClick={() =>
           toast.success({
-            text: 'Ready 🚀✨',
+            text: "Ready 🚀✨",
           })
         }
       >

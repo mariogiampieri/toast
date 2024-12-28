@@ -1,7 +1,7 @@
 ---
-title: 'Usage with Next.js'
-description: 'How to use the library with Next.js'
-category: 'Framework guides'
+title: "Usage with Next.js"
+description: "How to use the library with Next.js"
+category: "Framework guides"
 ---
 
 > 💡 This guide shows how to use the library with Next.js /app router. Also supports /pages router.
@@ -29,9 +29,7 @@ npx create-next-app@latest
 
 1. Run the following command:
 
-```bash
-npm install @pheralb/toast
-```
+<InstallLibrary />
 
 2. Add the [`Toaster`](/toaster) to the `layout.tsx` file:
 
@@ -40,7 +38,7 @@ npm install @pheralb/toast
 ```tsx {1,13}
 // 📃 layout.tsx
 
-import { Toaster } from '@pheralb/toast';
+import { Toaster } from "@pheralb/toast";
 
 export default function RootLayout({
   children,
@@ -61,16 +59,16 @@ export default function RootLayout({
 3. Use the [`toast`](/toast) function in your **client** components:
 
 ```tsx
-'use client';
+"use client";
 
-import { toast } from '@pheralb/toast';
+import { toast } from "@pheralb/toast";
 
 export default function MyComponent() {
   return (
     <button
       onClick={() =>
         toast.success({
-          text: 'Ready 🚀✨',
+          text: "Ready 🚀✨",
         })
       }
     >
@@ -87,9 +85,9 @@ The library exports a CSS file that you can include in your project. Only use in
 ```tsx
 // 📄 app/layout.tsx
 
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import '@pheralb/toast/dist/styles.css';
+import "@pheralb/toast/dist/styles.css";
 
 export default function RootLayout({
   children,
