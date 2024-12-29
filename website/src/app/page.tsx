@@ -4,7 +4,7 @@ import { allDocs } from "content-collections";
 import { notFound } from "next/navigation";
 import { MDX } from "@/mdx/components";
 
-import Article from "@/components/article";
+import Article from "@/components/article/content";
 import TableOfContents from "@/components/layout/toc";
 
 const indexPage = "index";

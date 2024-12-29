@@ -4,8 +4,9 @@ import { allDocs } from "content-collections";
 import { notFound } from "next/navigation";
 
 import { MDX } from "@/mdx/components";
-import Article from "@/components/article";
+import Article from "@/components/article/content";
 import TableOfContents from "@/components/layout/toc";
+import ArticleHeader from "@/components/article/header";
 
 type DocPageProps = {
   params: Promise<{ slug: string }>;
@@ -38,6 +39,7 @@ export default async function DocPage({ params }: DocPageProps) {
   return (
     <>
       <Article>
+        <ArticleHeader document={document} />
         <MDX code={document.mdx} />
       </Article>
       <div>
