@@ -8,6 +8,8 @@ import type {
 import { useDocsStore } from "@/store";
 
 import { toast } from "@pheralb/toast";
+import { useTheme } from "next-themes";
+
 import { Button } from "@/ui/button";
 import {
   CheckIcon,
@@ -91,6 +93,7 @@ const Positions = () => {
 
 const ThemeExamples = () => {
   const { toastTheme, setToastTheme } = useDocsStore();
+  const { theme: currentTheme } = useTheme();
   const iconSize = 14;
 
   const handleChangeTheme = (theme: Theme | undefined) => {
@@ -152,7 +155,10 @@ const ThemeExamples = () => {
           <span>reset</span>
         </Button>
       </div>
-      <Codeblock code={`<Toaster theme="${toastTheme}" />`} lang="tsx" />
+      <Codeblock
+        code={`<Toaster theme="${toastTheme ?? currentTheme}" />`}
+        lang="tsx"
+      />
     </div>
   );
 };
