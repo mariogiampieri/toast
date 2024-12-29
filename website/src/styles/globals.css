@@ -18,7 +18,7 @@ html.light code[data-theme*=" "],
 html.light code[data-theme*=" "] span,
 html.light .shiki,
 html.light .shiki span {
-  color: var(--shiki-light) !important;
+  color: var(--shiki-light);
   background-color: transparent !important;
 }
 
