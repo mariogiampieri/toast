@@ -9,7 +9,9 @@ import {
 } from "fumadocs-core/mdx-plugins";
 import GithubSlugger from "github-slugger";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { visit } from "unist-util-visit";
+import { HEADING_LINK_ANCHOR } from "./src/ui/prose-headings";
 
 // Rehype Shiki Options:
 const rehypePrettyOptions: Options = {
@@ -77,6 +79,15 @@ const docs = defineCollection({
             }
           });
         },
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: "wrap",
+            properties: {
+              className: [HEADING_LINK_ANCHOR],
+            },
+          },
+        ],
       ],
     });
     const slugger = new GithubSlugger();
