@@ -1,7 +1,7 @@
 "use client";
 
 import { toast, type ToastOptions } from "@pheralb/toast";
-import { PaletteIcon, RefreshCcw } from "lucide-react";
+import { MessageSquareShareIcon, PaletteIcon, RefreshCcw } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { useDocsStore } from "@/store";
 import Codeblock from "@/components/codeblock/client";
@@ -25,7 +25,7 @@ const ToastCustomOptions = () => {
       container: cn("flex items-center space-x-[6px] w-full", "p-2"),
       content: cn("flex flex-col space-y-0.5"),
       actions: {
-        container: cn(""),
+        container: cn("relative"),
         actionBtn: cn(
           "px-2 py-1 text-sm font-medium rounded-md",
           "bg-zinc-300 dark:bg-zinc-700",
@@ -65,25 +65,29 @@ const ToastCustomOptions = () => {
   return (
     <div className="flex flex-col space-y-2 pt-2">
       <div className="flex items-center justify-between">
-        <button
-          onClick={() =>
-            toast.success({
-              text: "Hello, world!",
-              description: "👋 Welcome",
-              delayDuration: 20000,
-            })
-          }
-        >
-          Show Toast
-        </button>
-        <Button
-          variant="outline"
-          disabled={applyCustomTheme?.headless}
-          onClick={() => handleAddStyles()}
-        >
-          <PaletteIcon size={14} />
-          <span>Modify styles</span>
-        </Button>
+        <div className="flex items-center space-x-1">
+          <Button
+            variant="outline"
+            disabled={applyCustomTheme?.headless}
+            onClick={() => handleAddStyles()}
+          >
+            <PaletteIcon size={14} />
+            <span>Modify styles</span>
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() =>
+              toast.success({
+                text: "Hello, world!",
+                description: "👋 Welcome",
+                delayDuration: 20000,
+              })
+            }
+          >
+            <MessageSquareShareIcon size={14} />
+            <span>Show Toast</span>
+          </Button>
+        </div>
         <Button
           variant="outline"
           disabled={!applyCustomTheme?.headless}
@@ -100,7 +104,11 @@ const ToastCustomOptions = () => {
     classNames: {
       toast: '${toastStyles.classNames?.toast}',
       container: '${toastStyles.classNames?.container}',
-      actions: '${toastStyles.classNames?.actions}',
+      actions: {
+        container: '${toastStyles.classNames?.actions?.container}',
+        actionBtn: '${toastStyles.classNames?.actions?.actionBtn}',
+        closeBtn: '${toastStyles.classNames?.actions?.closeBtn}',
+      },
       content: '${toastStyles.classNames?.content}',
       icon: '${toastStyles.classNames?.icon}',
     },

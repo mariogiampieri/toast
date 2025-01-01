@@ -53,8 +53,6 @@ export const SparkleSvg = ({
 const Github = (props: SVGProps<SVGSVGElement>) => (
   <svg
     viewBox="0 0 256 250"
-    width="1em"
-    height="1em"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="xMidYMid"
@@ -67,8 +65,6 @@ const Github = (props: SVGProps<SVGSVGElement>) => (
 const X = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
     fill="none"
     viewBox="0 0 1200 1227"
     {...props}
