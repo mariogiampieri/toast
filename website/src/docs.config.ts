@@ -43,14 +43,14 @@ export const SocialLinks: iDocsRoutes[] = [
     category: "Social Links",
     routes: [
       {
-        title: "Twitter",
-        path: "https://twitter.com/pheralb_",
-        icon: X,
-      },
-      {
         title: "GitHub",
         path: "https://github.com/pheralb/toast",
         icon: Github,
+      },
+      {
+        title: "Twitter",
+        path: "https://twitter.com/pheralb_",
+        icon: X,
       },
     ],
   },
