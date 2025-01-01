@@ -104,7 +104,7 @@ The library exports a CSS file that you can include in your project. Only use in
 
 import type { LinksFunction } from "@remix-run/node";
 
-import pheralbToastStyles from "@pheralb/toast/dist/styles.css";
+import pheralbToastStyles from "@pheralb/toast/dist/styles.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: pheralbToastStyles },
