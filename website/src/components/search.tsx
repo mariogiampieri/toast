@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { allRoutes } from "@/docs.config";
+import { FileIcon, SearchIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import {
   CommandDialog,
@@ -12,10 +13,11 @@ import {
   CommandList,
 } from "@/ui/command";
 import { Button } from "@/ui/button";
-import { FileIcon, SearchIcon } from "lucide-react";
+import { allRoutes } from "@/docs.config";
 
 const SearchModal = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -55,7 +57,7 @@ const SearchModal = () => {
                   title={route.title}
                   onSelect={() => {
                     setOpen(false);
-                    window.location.href = route.path;
+                    router.push(route.path);
                   }}
                 >
                   {route.icon ? (

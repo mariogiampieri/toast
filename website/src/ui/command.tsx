@@ -3,10 +3,11 @@
 import { ComponentRef, forwardRef } from "react";
 import { type DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
-import { Search } from "lucide-react";
 
 import { cn } from "@/utils/cn";
-import { Dialog, DialogContent } from "@/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/ui/dialog";
+import { Badge } from "./badge";
+import { usePathname } from "next/navigation";
 
 const Command = forwardRef<
   ComponentRef<typeof CommandPrimitive>,
@@ -15,7 +16,7 @@ const Command = forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-white text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50",
+      "flex h-full w-full flex-col overflow-hidden rounded-md bg-white text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50",
       className,
     )}
     {...props}
@@ -24,9 +25,20 @@ const Command = forwardRef<
 Command.displayName = CommandPrimitive.displayName;
 
 const CommandDialog = ({ children, ...props }: DialogProps) => {
+  const pathname = usePathname();
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0">
+      <DialogContent className="gap-0 p-0">
+        <DialogHeader className="px-3 pt-3.5">
+          <DialogTitle className="text-[15px] font-normal">
+            <Badge variant="outline">
+              {pathname === "/"
+                ? "Home"
+                : pathname.split("/")[1].charAt(0).toUpperCase() +
+                  pathname.split("/")[1].slice(1).toLowerCase()}
+            </Badge>
+          </DialogTitle>
+        </DialogHeader>
         <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-neutral-500 dark:[&_[cmdk-group-heading]]:text-neutral-400 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {children}
         </Command>
@@ -39,8 +51,10 @@ const CommandInput = forwardRef<
   ComponentRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+  <div
+    className="flex items-center border-b border-neutral-200 px-3 dark:border-neutral-800"
+    cmdk-input-wrapper=""
+  >
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
@@ -87,7 +101,7 @@ const CommandGroup = forwardRef<
   <CommandPrimitive.Group
     ref={ref}
     className={cn(
-      "overflow-hidden p-1 text-neutral-950 dark:text-neutral-50 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-neutral-500 dark:[&_[cmdk-group-heading]]:text-neutral-400",
+      "overflow-hidden p-2 text-neutral-900 dark:text-neutral-50 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-neutral-500 dark:[&_[cmdk-group-heading]]:text-neutral-400",
       className,
     )}
     {...props}
