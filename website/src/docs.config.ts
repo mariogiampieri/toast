@@ -1,5 +1,5 @@
 import type { SVGProps, JSX } from "react";
-import { X, Github, Nextjs, Remix, Astro } from "@/ui/icons";
+import { X, Github, Nextjs, Remix, Astro, TanStack } from "@/ui/icons";
 
 export interface iDocsRoutes {
   category: string;
@@ -28,6 +28,11 @@ export const FrameworkGuides: iDocsRoutes[] = [
         title: "Remix",
         path: "/remix",
         icon: Remix,
+      },
+      {
+        title: "TanStack Start",
+        path: "/tanstack",
+        icon: TanStack,
       },
     ],
   },
