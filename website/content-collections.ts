@@ -20,6 +20,7 @@ const rehypePrettyOptions: Options = {
     light: "github-light",
   },
   keepBackground: false,
+  bypassInlineCode: true,
 };
 
 // Domain:
