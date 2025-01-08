@@ -8,6 +8,7 @@ import { buttonVariants } from "@/ui/button";
 import ExternalLink from "@/ui/externalLink";
 import { ModeToggle } from "../modeToggle";
 import SearchModal from "../search";
+import ResponsiveSidebarMenu from "./sidebar/responsiveSidebarMenu";
 
 const Header = () => {
   return (
@@ -20,7 +21,7 @@ const Header = () => {
     >
       <div className="container flex max-w-7xl items-center justify-between">
         <div className="flex items-center">
-          {/* <MobileMenu client:load /> */}
+          <ResponsiveSidebarMenu />
           <Link
             href="/"
             title="pheralb/toast"

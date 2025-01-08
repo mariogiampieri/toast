@@ -14,7 +14,7 @@ import ToasterProvider from "@/providers/toasterProvider";
 
 // Layout:
 import Header from "@/components/layout/header";
-import Sidebar from "@/components/layout/sidebar";
+import { Sidebar } from "@/components/layout/sidebar/sidebar";
 
 const fontSans = Geist({
   variable: "--font-sans",
