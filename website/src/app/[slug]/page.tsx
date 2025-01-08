@@ -5,8 +5,10 @@ import { notFound } from "next/navigation";
 
 import { MDX } from "@/mdx/components";
 import Article from "@/components/article/content";
-import TableOfContents from "@/components/layout/toc";
 import ArticleHeader from "@/components/article/header";
+
+import { TableOfContents } from "@/components/layout/tableOfContents/toc";
+import ResponsiveTocMenu from "@/components/layout/tableOfContents/responsiveTocMenu";
 
 type DocPageProps = {
   params: Promise<{ slug: string }>;
@@ -40,6 +42,9 @@ export default async function DocPage({ params }: DocPageProps) {
     <>
       <Article>
         <ArticleHeader document={document} />
+        {document.tableOfContents && (
+          <ResponsiveTocMenu tocData={document.tableOfContents} />
+        )}
         <MDX code={document.mdx} />
       </Article>
       <div>

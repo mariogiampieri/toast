@@ -5,7 +5,9 @@ import { notFound } from "next/navigation";
 import { MDX } from "@/mdx/components";
 
 import Article from "@/components/article/content";
-import TableOfContents from "@/components/layout/toc";
+
+import { TableOfContents } from "@/components/layout/tableOfContents/toc";
+import ResponsiveTocMenu from "@/components/layout/tableOfContents/responsiveTocMenu";
 
 const indexPage = "index";
 
@@ -31,7 +33,10 @@ const Page = () => {
 
   return (
     <>
-      <Article>
+      <Article className="pb-8 pt-4 md:pt-8">
+        {document.tableOfContents && (
+          <ResponsiveTocMenu tocData={document.tableOfContents} />
+        )}
         <MDX code={document.mdx} />
       </Article>
       <div>
