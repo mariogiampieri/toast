@@ -31,7 +31,7 @@ pnpm create @tanstack/router
 
 2. Add the [`Toaster`](/toaster) to the `routes/__root.tsx` file:
 
-```tsx
+```tsx {13}
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Toaster } from "@pheralb/toast";
@@ -43,8 +43,8 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
-      <Toaster position="bottom-right" />
       <Outlet />
+      <Toaster position="bottom-right" />
       <TanStackRouterDevtools />
     </>
   );

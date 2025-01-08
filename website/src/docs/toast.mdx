@@ -1,10 +1,10 @@
 ---
 title: "Toast"
-description: "Use toast to create a toast from anywhere in your React application"
+description: "Use toast() to create a notification from anywhere in your React application"
 category: "API"
 ---
 
-> 💡 Make sure you add the [`<Toaster />`](/toaster) provider to your app first.
+> ⚠️ Make sure you add the [`<Toaster />`](/toaster) provider to your app first.
 
 ```tsx
 import { toast } from "@pheralb/toast";
@@ -26,7 +26,7 @@ Show a button and execute a custom function when clicked. The default text for t
 
 <ToastActionsExamples client:only="react" />
 
-```tsx
+```tsx {3-8}
 toast.default({
   text: `A toast with 👀 action button`,
   action: {
@@ -44,7 +44,7 @@ Show a toast with loading state and will update automatically after the promise 
 
 <ToastLoadingExample client:only="react" />
 
-```tsx
+```tsx {4-18}
 toast.loading({
   // Initial message:
   text: "Loading",
@@ -103,7 +103,7 @@ toast.loading({
 
 You can use a custom icon for the toast using `icon` property:
 
-```tsx
+```tsx {3}
 toast.default({
   text: "Party popper!",
   icon: <PartyPopperIcon width={18} height={18} />,
