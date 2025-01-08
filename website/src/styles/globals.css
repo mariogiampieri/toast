@@ -20,13 +20,13 @@
       left: -16px;
       right: -16px;
       bottom: 0;
-      background-color: theme("colors.neutral.400 / 13%");
+      background-color: theme("colors.neutral.400 / 8%");
       border-left: 1px solid theme("colors.neutral.400");
       z-index: -1;
     }
 
     .dark &::before {
-      background-color: theme("colors.neutral.600 / 20%");
+      background-color: theme("colors.neutral.600 / 8%");
       border-left: 1px solid theme("colors.neutral.600");
     }
   }
