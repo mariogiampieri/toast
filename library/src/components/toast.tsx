@@ -1,23 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
 import type {
   Position,
   ToastIcons,
   ToastOptions,
   ToastPropsWithLoading,
   Variant,
-} from '../types/toast.types';
+} from "../types/toast.types";
 
-import { Error, Info, Loading, Success, Warning } from '../icons';
-import { useTimeout } from '../hooks/useTimeout';
-import { classNames, prefersReducedMotion } from '../utils';
+import { useCallback, useEffect, useState } from "react";
 
-const iconsColors: Record<Variant, string> = {
-  success: '#22c55e',
-  error: '#ef4444',
-  warning: '#eab308',
-  info: '#3b82f6',
-  loading: 'currentColor',
-};
+import { Error, Info, Loading, Success, Warning } from "../icons";
+import { useTimeout } from "../hooks/useTimeout";
+import { classNames, prefersReducedMotion } from "../utils";
+
+import { iconsColors, getAnimationClass } from "./default-options";
 
 interface ToastComponentProps extends ToastPropsWithLoading {
   toastPosition: Position;
@@ -26,7 +21,7 @@ interface ToastComponentProps extends ToastPropsWithLoading {
 }
 
 const Toast = (props: ToastComponentProps) => {
-  const [status, setStatus] = useState<Variant>(props.variant || 'info');
+  const [status, setStatus] = useState<Variant>(props.variant || "info");
   const [iconColor, setIconColor] = useState<string>(iconsColors[status]);
   const [toastText, setToastText] = useState<string>(props.text);
   const [isExiting, setIsExiting] = useState<boolean>(false);
@@ -38,8 +33,8 @@ const Toast = (props: ToastComponentProps) => {
   }, delayDuration);
 
   const iconClass = classNames(
-    't_icon',
-    props.variant === 'loading' && status === 'loading' ? 't_loading' : '',
+    "t_icon",
+    props.variant === "loading" && status === "loading" ? "t_loading" : "",
   );
 
   const icons: ToastIcons = {
@@ -111,41 +106,19 @@ const Toast = (props: ToastComponentProps) => {
     pause();
   };
 
-  const ANIMATION_ENTER_MAP: Record<Position, string> = {
-    'top-left': 't_slide-top',
-    'top-right': 't_slide-top',
-    'top-center': 't_slide-top',
-    'bottom-left': 't_slide-bottom',
-    'bottom-right': 't_slide-bottom',
-    'bottom-center': 't_slide-bottom',
-  };
-
-  const ANIMATION_EXIT_MAP: Record<Position, string> = {
-    'top-left': 't_slide-left',
-    'top-right': 't_slide-right',
-    'top-center': 't_slide-top-exit',
-    'bottom-left': 't_slide-left',
-    'bottom-right': 't_slide-right',
-    'bottom-center': 't_slide-bottom-exit',
-  };
-
-  const animationClass = isExiting
-    ? ANIMATION_EXIT_MAP[props.toastPosition]
-    : ANIMATION_ENTER_MAP[props.toastPosition];
-
   useEffect(() => {
-    if (props.variant === 'loading' && props.options) {
+    if (props.variant === "loading" && props.options) {
       pause();
 
       const executePromise =
-        typeof props.options.promise === 'function'
+        typeof props.options.promise === "function"
           ? props.options.promise()
           : Promise.resolve(props.options.promise);
 
       executePromise
         .then((data) => {
           resume();
-          setStatus('success');
+          setStatus("success");
           if (props.options!.autoDismiss) {
             setTimeout(() => {
               handleCloseToast();
@@ -158,7 +131,7 @@ const Toast = (props: ToastComponentProps) => {
           }
         })
         .catch((error) => {
-          setStatus('error');
+          setStatus("error");
           setToastText(props.options!.error);
           setIconColor(iconsColors.error);
           if (props.options!.autoDismiss) {
@@ -188,20 +161,24 @@ const Toast = (props: ToastComponentProps) => {
       title={props.text}
       className={classNames(
         !props.toastOptions?.headless && prefersReducedMotion()
-          ? ''
-          : animationClass,
-        !props.toastOptions?.headless && props.theme === 'system'
-          ? 't_system-theme'
-          : '',
-        !props.toastOptions?.headless && props.theme === 'dark'
-          ? 't_dark-theme'
-          : '',
-        !props.toastOptions?.headless && props.theme === 'light'
-          ? 't_light-theme'
-          : '',
+          ? ""
+          : getAnimationClass(
+              isExiting,
+              props.toastOptions?.animationOnClose || "default",
+              props.toastPosition,
+            ),
+        !props.toastOptions?.headless && props.theme === "system"
+          ? "t_system-theme"
+          : "",
+        !props.toastOptions?.headless && props.theme === "dark"
+          ? "t_dark-theme"
+          : "",
+        !props.toastOptions?.headless && props.theme === "light"
+          ? "t_light-theme"
+          : "",
         props.toastOptions?.headless
           ? props.toastOptions?.classNames?.toast
-          : 't_global',
+          : "t_global",
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -212,7 +189,7 @@ const Toast = (props: ToastComponentProps) => {
         className={
           props.toastOptions?.headless
             ? props.toastOptions?.classNames?.container
-            : 't_container'
+            : "t_container"
         }
       >
         {props.variant && !props.icon ? (
@@ -220,7 +197,7 @@ const Toast = (props: ToastComponentProps) => {
             className={
               props.toastOptions?.headless
                 ? props.toastOptions?.classNames?.icon
-                : 't_icon'
+                : "t_icon"
             }
           >
             {IconComponent}
@@ -231,7 +208,7 @@ const Toast = (props: ToastComponentProps) => {
               className={
                 props.toastOptions?.headless
                   ? props.toastOptions?.classNames?.icon
-                  : 't_icon'
+                  : "t_icon"
               }
             >
               {props.icon}
@@ -242,7 +219,7 @@ const Toast = (props: ToastComponentProps) => {
           className={
             props.toastOptions?.headless
               ? props.toastOptions?.classNames?.content
-              : 't_content'
+              : "t_content"
           }
         >
           <p id={`toast-title-${props.id}`}>{toastText}</p>
@@ -255,30 +232,38 @@ const Toast = (props: ToastComponentProps) => {
         className={
           props.toastOptions?.headless
             ? props.toastOptions?.classNames?.actions.container
-            : 't_actions'
+            : "t_actions"
         }
       >
         {props.action && (
           <button
             onClick={props.action.onClick}
             title={
-              typeof props.action.content === 'string'
+              typeof props.action.content === "string"
                 ? props.action.content
-                : 'Action Button'
+                : "Action Button"
             }
             className={
               props.toastOptions?.headless
                 ? props.toastOptions?.classNames?.actions.actionBtn
-                : 't_action'
+                : "t_action-btn"
             }
           >
             {props.action.content ??
               props.toastOptions?.defaultActionContent ??
-              'Action'}
+              "Action"}
           </button>
         )}
-        <button onClick={handleCloseToast} title="Close toast">
-          {props.toastOptions?.defaultCloseContent ?? 'Close'}
+        <button
+          onClick={handleCloseToast}
+          title="Close toast"
+          className={
+            props.toastOptions?.headless
+              ? props.toastOptions?.classNames?.actions.closeBtn
+              : ""
+          }
+        >
+          {props.toastOptions?.defaultCloseContent ?? "Close"}
         </button>
       </div>
     </div>

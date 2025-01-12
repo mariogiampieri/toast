@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from "react";
 
 interface UseTimeoutReturn {
   pause: () => void;
@@ -11,9 +11,9 @@ export const useTimeout = (
   callback: () => void,
   delay: number,
 ): UseTimeoutReturn => {
-  const timeoutRef = useRef<number>();
+  const timeoutRef = useRef<number>(0);
   const callbackRef = useRef(callback);
-  const startTimeRef = useRef<number>();
+  const startTimeRef = useRef<number>(0);
   const remainingRef = useRef(delay);
   const isActiveRef = useRef(true);
 

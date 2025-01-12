@@ -1,0 +1,61 @@
+---
+title: "Getting Started"
+description: "Getting started with @pheralb/toast"
+category: "Introduction"
+---
+
+<article>
+
+<Hero />
+
+## Framework guides
+
+<FrameworkGuidesComponent />
+
+## Getting Started
+
+1. Install the library:
+
+<InstallLibrary />
+
+2. Add the toast provider:
+
+```jsx
+// 📃 main.tsx
+
+import { Toaster } from '@pheralb/toast';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+    <Toaster />
+  </React.StrictMode>,
+);
+```
+
+3. Usage:
+
+```jsx {10-13}
+// 📃 index.tsx
+
+import { toast } from "@pheralb/toast";
+
+export default function Index() {
+  return (
+    <>
+      <button
+        onClick={() =>
+          toast.success({
+            text: "pheralb/toast",
+            description: "✨ A beautiful toast library for React",
+          })
+        }
+      >
+        <span>Render a toast</span>
+      </button>
+    </>
+  );
+}
+```
+
+</article>

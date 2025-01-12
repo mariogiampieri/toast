@@ -38,6 +38,9 @@ dist
 /.next/
 /out/
 
+# Content Collections
+.content-collections
+
 # Astro
 .astro
 

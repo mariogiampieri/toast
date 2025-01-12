@@ -2,7 +2,7 @@
 const config = {
   trailingComma: 'all',
   semi: true,
-  singleQuote: true,
+  singleQuote: false,
   plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
   overrides: [
     {
