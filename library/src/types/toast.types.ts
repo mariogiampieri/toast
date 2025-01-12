@@ -1,16 +1,16 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-export type Variant = 'success' | 'error' | 'warning' | 'info' | 'loading';
+export type Variant = "success" | "error" | "warning" | "info" | "loading";
 
 export type Position =
-  | 'top-left'
-  | 'top-right'
-  | 'top-center'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'bottom-center';
+  | "top-left"
+  | "top-right"
+  | "top-center"
+  | "bottom-left"
+  | "bottom-right"
+  | "bottom-center";
 
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = "light" | "dark" | "system";
 
 export interface Action {
   content?: string | ReactNode;
@@ -52,7 +52,10 @@ export interface ToastClassnames {
   actions: ToastActionsCustomClassnames;
 }
 
+export type ToastAnimations = "default" | "swipe";
+
 export type ToastOptions = {
+  animationOnClose?: ToastAnimations;
   font?: string;
   icons?: ToastIcons;
   headless?: boolean;

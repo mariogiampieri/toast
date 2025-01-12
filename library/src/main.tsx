@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import './styles/globals.css';
+import "./styles/globals.css";
 
-export { toast } from './components/toast-functions';
-export { Toaster } from './components/toaster';
+export { toast } from "./components/toast-functions";
+export { Toaster } from "./components/toaster";
 export type {
   Position as ToastPosition,
   ToastProps as ToastProperties,
@@ -10,4 +10,5 @@ export type {
   Theme as ToastTheme,
   ToastOptions,
   ToasterProperties,
-} from './types/toast.types';
+  ToastAnimations,
+} from "./types/toast.types";
