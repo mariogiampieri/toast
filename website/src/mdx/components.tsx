@@ -13,6 +13,9 @@ import {
   ToastLoadingExample,
 } from "@/components/playground/toast";
 import { Positions, ThemeExamples } from "@/components/playground/toaster";
+import ToastAnimation from "@/components/playground/toastAnimation";
+
+// Local Components:
 import CodeblockMDX from "@/components/codeblock/mdx";
 
 interface MDXComponentsProps {
@@ -35,6 +38,7 @@ export function MDX(props: MDXComponentsProps) {
         ToastVariantExamples,
         ToastActionsExamples,
         ToastLoadingExample,
+        ToastAnimation,
       }}
     />
   );
