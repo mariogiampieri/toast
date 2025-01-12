@@ -8,6 +8,10 @@
   --text-color: #171717;
   --description-color: #262626;
   --focus-color: #a3a3a3;
+
+  /* Animation Duration */
+  --animation-enter-duration: 0.4s;
+  --animation-exit-duration: 0.4s;
 }
 
 .t_light-theme {
@@ -29,7 +33,7 @@
     --border-color: #262626;
     --text-color: #fafafa;
     --description-color: #e5e5e5;
-    --focus-color: #525252;
+    --focus-color: #404040;
   }
 }
 
@@ -205,26 +209,25 @@
   background-color: var(--hover-color);
 }
 
-/* Toast Enter Animations: */
-/* --- */
+/** Toast Loading State **/
 
-.t_slide-top {
-  animation: slide-top 0.4s ease;
+.t_loading {
+  animation: spin 1s linear infinite;
 }
 
-@keyframes slide-top {
-  0% {
-    opacity: 0;
-    transform: translateY(100%);
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  to {
+    transform: rotate(360deg);
   }
 }
 
-.t_slide-bottom {
-  animation: slide-bottom 0.4s ease-in-out;
+/** Default Toast Enter Animations **/
+
+.t_slide-enter-top {
+  animation: slide-top var(--animation-enter-duration) ease;
 }
 
 @keyframes slide-top {
@@ -238,26 +241,8 @@
   }
 }
 
-/* Toast Exit Animations: */
-/* --- */
-
-.t_slide-left {
-  animation: slide-left 0.4s ease;
-}
-
-@keyframes slide-left {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  90% {
-    opacity: 0;
-    transform: translateX(-90%);
-  }
-}
-
-.t_slide-bottom {
-  animation: slide-bottom 0.4s ease;
+.t_slide-enter-bottom {
+  animation: slide-bottom var(--animation-enter-duration) ease;
 }
 
 @keyframes slide-bottom {
@@ -271,23 +256,10 @@
   }
 }
 
-.t_slide-bottom-exit {
-  animation: slide-bottom-exit 0.4s ease;
-}
+/** Default Toast Exit Animations **/
 
-@keyframes slide-bottom-exit {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  90% {
-    opacity: 0;
-    transform: translateY(90%);
-  }
-}
-
-.t_slide-top-exit {
-  animation: slide-top-exit 0.4s ease;
+.t-slide-exit-top {
+  animation: slide-top-exit var(--animation-exit-duration) ease;
 }
 
 @keyframes slide-top-exit {
@@ -295,36 +267,70 @@
     opacity: 1;
     transform: translateY(0);
   }
-  90% {
+  100% {
     opacity: 0;
-    transform: translateY(-90%);
+    transform: translateY(-100%);
   }
 }
 
-.t_slide-right {
-  animation: slide-right 0.4s ease;
+.t-slide-exit-bottom {
+  animation: slide-bottom-exit var(--animation-exit-duration) ease;
 }
 
-@keyframes slide-right {
+@keyframes slide-bottom-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+/** Swipe Exit Animations **/
+
+.t_swipe-exit-center {
+  animation: swipe-center-exit var(--animation-exit-duration) ease;
+}
+
+@keyframes swipe-center-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+.t_swipe-exit-left {
+  animation: swipe-left-exit var(--animation-exit-duration) ease;
+}
+
+@keyframes swipe-left-exit {
   0% {
     opacity: 1;
     transform: translateX(0);
   }
-  90% {
+  100% {
     opacity: 0;
-    transform: translateX(90%);
+    transform: translateX(-100%);
   }
 }
 
-.t_loading {
-  animation: spin 1s linear infinite;
+.t_swipe-exit-right {
+  animation: swipe-right-exit var(--animation-exit-duration) ease;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+@keyframes swipe-right-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
   }
 }
