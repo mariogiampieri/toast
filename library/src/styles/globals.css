@@ -1,4 +1,9 @@
 /* Global Theme Styles */
+:root {
+  /* Animation Duration */
+  --pheralb-toast-animation-enter: 0.4s;
+  --pheralb-toast-animation-exit: 0.4s;
+}
 
 :where(.t_global) {
   --box-shadow: rgba(0, 0, 0, 0.1);
@@ -8,10 +13,6 @@
   --text-color: #171717;
   --description-color: #262626;
   --focus-color: #a3a3a3;
-
-  /* Animation Duration */
-  --animation-enter-duration: 0.4s;
-  --animation-exit-duration: 0.4s;
 }
 
 .t_light-theme {
@@ -45,7 +46,7 @@
   gap: 10px;
   padding: 14px;
   position: fixed;
-  z-index: 9999;
+  z-index: 999;
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
   width: 100%;
@@ -141,6 +142,8 @@
 
 .t_container {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   max-width: 20rem;
   height: 100wh;
@@ -227,7 +230,7 @@
 /** Default Toast Enter Animations **/
 
 .t_slide-enter-top {
-  animation: slide-top var(--animation-enter-duration) ease;
+  animation: slide-top var(--pheralb-toast-animation-enter) ease;
 }
 
 @keyframes slide-top {
@@ -242,7 +245,7 @@
 }
 
 .t_slide-enter-bottom {
-  animation: slide-bottom var(--animation-enter-duration) ease;
+  animation: slide-bottom var(--pheralb-toast-animation-enter) ease;
 }
 
 @keyframes slide-bottom {
@@ -258,13 +261,18 @@
 
 /** Default Toast Exit Animations **/
 
+.t-slide-exit-top,
+.t-slide-exit-bottom {
+  will-change: transform, opacity;
+}
+
 .t-slide-exit-top {
-  animation: slide-top-exit var(--animation-exit-duration) ease;
+  animation: slide-top-exit var(--pheralb-toast-animation-exit) ease;
 }
 
 @keyframes slide-top-exit {
   0% {
-    opacity: 1;
+    opacity: 1; /* Cambia de 0 a 1 */
     transform: translateY(0);
   }
   100% {
@@ -274,7 +282,7 @@
 }
 
 .t-slide-exit-bottom {
-  animation: slide-bottom-exit var(--animation-exit-duration) ease;
+  animation: slide-bottom-exit var(--pheralb-toast-animation-exit) ease;
 }
 
 @keyframes slide-bottom-exit {
@@ -291,7 +299,7 @@
 /** Swipe Exit Animations **/
 
 .t_swipe-exit-center {
-  animation: swipe-center-exit var(--animation-exit-duration) ease;
+  animation: swipe-center-exit var(--pheralb-toast-animation-exit) ease;
 }
 
 @keyframes swipe-center-exit {
@@ -306,7 +314,7 @@
 }
 
 .t_swipe-exit-left {
-  animation: swipe-left-exit var(--animation-exit-duration) ease;
+  animation: swipe-left-exit var(--pheralb-toast-animation-exit) ease;
 }
 
 @keyframes swipe-left-exit {
@@ -321,7 +329,7 @@
 }
 
 .t_swipe-exit-right {
-  animation: swipe-right-exit var(--animation-exit-duration) ease;
+  animation: swipe-right-exit var(--pheralb-toast-animation-exit) ease;
 }
 
 @keyframes swipe-right-exit {

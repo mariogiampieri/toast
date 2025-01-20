@@ -17,6 +17,7 @@ import { iconsColors, getAnimationClass } from "./default-options";
 interface ToastComponentProps extends ToastPropsWithLoading {
   toastPosition: Position;
   toastOptions?: ToastOptions;
+  active?: boolean;
   onClose: () => void;
 }
 
@@ -160,13 +161,12 @@ const Toast = (props: ToastComponentProps) => {
       aria-describedby={`toast-description-${props.id}`}
       title={props.text}
       className={classNames(
-        !props.toastOptions?.headless && prefersReducedMotion()
-          ? ""
-          : getAnimationClass(
-              isExiting,
-              props.toastOptions?.animationOnClose || "default",
-              props.toastPosition,
-            ),
+        prefersReducedMotion(),
+        getAnimationClass(
+          isExiting,
+          props.toastOptions?.animationOnClose || "slide",
+          props.toastPosition,
+        ),
         !props.toastOptions?.headless && props.theme === "system"
           ? "t_system-theme"
           : "",
@@ -180,6 +180,9 @@ const Toast = (props: ToastComponentProps) => {
           ? props.toastOptions?.classNames?.toast
           : "t_global",
       )}
+      style={{
+        zIndex: props.active ? 1000 : 999,
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleMouseEnter}

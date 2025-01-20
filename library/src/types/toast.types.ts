@@ -52,7 +52,7 @@ export interface ToastClassnames {
   actions: ToastActionsCustomClassnames;
 }
 
-export type ToastAnimations = "default" | "swipe";
+export type ToastAnimations = "slide" | "swipe";
 
 export type ToastOptions = {
   animationOnClose?: ToastAnimations;

@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import type {
   ToastPropsWithVariant,
   ToasterProperties,
-} from '../types/toast.types';
+} from "../types/toast.types";
 
-import ToastComponent from './toast';
-import { classNames, generateRandomId } from '../utils';
+import ToastComponent from "./toast";
+import { classNames, generateRandomId } from "../utils";
 
 // Ensure openToastGlobal is initialized correctly
 let openToastGlobal: (data: ToastPropsWithVariant) => void;
 
 export const Toaster = ({
   maxToasts = 4,
-  position = 'bottom-right',
-  theme = 'system',
+  position = "bottom-right",
+  theme = "system",
   toastOptions,
 }: ToasterProperties) => {
   const [toasts, setToasts] = useState<ToastPropsWithVariant[]>([]);
@@ -32,9 +32,9 @@ export const Toaster = ({
     };
     setToasts((prevToasts) => {
       const isTopPosition =
-        position === 'top-left' ||
-        position === 'top-right' ||
-        position === 'top-center';
+        position === "top-left" ||
+        position === "top-right" ||
+        position === "top-center";
 
       if (prevToasts.length >= maxToasts) {
         return isTopPosition
@@ -65,14 +65,14 @@ export const Toaster = ({
         role="alert"
         aria-live="polite"
         className={classNames(
-          't_toasts',
-          position === 'top-left' ? 't_top-left' : '',
-          position === 'top-right' ? 't_top-right' : '',
-          position === 'top-center' ? 't_top-center' : '',
-          position === 'bottom-left' ? 't_bottom-left' : '',
-          position === 'bottom-right' ? 't_bottom-right' : '',
-          position === 'bottom-center' ? 't_bottom-center' : '',
-          toastOptions?.font ? toastOptions?.font : 't_default_font',
+          "t_toasts",
+          position === "top-left" ? "t_top-left" : "",
+          position === "top-right" ? "t_top-right" : "",
+          position === "top-center" ? "t_top-center" : "",
+          position === "bottom-left" ? "t_bottom-left" : "",
+          position === "bottom-right" ? "t_bottom-right" : "",
+          position === "bottom-center" ? "t_bottom-center" : "",
+          toastOptions?.font ? toastOptions?.font : "t_default_font",
         )}
       >
         {toasts.map((toast) => (
@@ -82,6 +82,7 @@ export const Toaster = ({
             toastPosition={position}
             onClose={() => closeToast(toast.id!)}
             toastOptions={toastOptions}
+            active={toasts.indexOf(toast) === toasts.length - 1}
             {...toast}
           />
         ))}
@@ -97,7 +98,7 @@ export const openToast = (data: ToastPropsWithVariant): void => {
     openToastGlobal(data);
   } else {
     console.error(
-      '🔔 <Toaster /> component is not mounted. Check toast.pheralb.dev/toaster for more information.',
+      "🔔 <Toaster /> component is not mounted. Check toast.pheralb.dev/toaster for more information.",
     );
   }
 };
