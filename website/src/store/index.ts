@@ -25,7 +25,7 @@ export const useDocsStore = create<DocsStore>((set) => ({
   toastVariant: "success",
   toastTheme: undefined,
   applyCustomTheme: false,
-  toastAnimation: "default",
+  toastAnimation: "slide",
   setApplyCustomTheme: (apply) => set({ applyCustomTheme: apply }),
   setToastPosition: (position) => set({ toastPosition: position }),
   setToastVariant: (variant) => set({ toastVariant: variant }),

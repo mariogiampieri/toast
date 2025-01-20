@@ -1,7 +1,14 @@
 "use client";
 
 import { toast, type ToastOptions } from "@pheralb/toast";
-import { MessageSquareShareIcon, PaletteIcon, RefreshCcw } from "lucide-react";
+import {
+  MessageSquareShareIcon,
+  PaletteIcon,
+  RefreshCcw,
+  XIcon,
+  PartyPopperIcon,
+} from "lucide-react";
+import JSConfetti from "js-confetti";
 import { cn } from "@/utils/cn";
 import { useDocsStore } from "@/store";
 import Codeblock from "@/components/codeblock/client";
@@ -15,41 +22,69 @@ const ToastCustomOptions = () => {
     headless: true,
     classNames: {
       toast: cn(
-        "font-sans text-sm font-medium",
-        "bg-zinc-200/90 dark:bg-zinc-800/90",
+        "font-sans text-sm font-medium z-50",
+        "bg-zinc-100/90 dark:bg-zinc-800/90",
         "text-zinc-900 dark:text-zinc-100",
-        "border border-zinc-300 dark:border-zinc-700",
-        "rounded-lg shadow-lg",
-        "relative flex items-center space-x-2",
+        "border border-zinc-200 dark:border-zinc-700",
+        "rounded-lg shadow-md",
+        "relative flex items-center",
       ),
-      container: cn("flex items-center space-x-[6px] w-full", "p-2"),
-      content: cn("flex flex-col space-y-0.5"),
+      container: cn("flex items-center py-4 space-x-2 px-4 w-full"),
+      content: cn(
+        "flex flex-col space-y-0.5 mr-2 [p:nth-child(1)]:text-red-500 dark:[p:nth-child(1)]:text-red-400",
+      ),
       actions: {
-        container: cn("relative"),
+        container: cn("flex flex-col px-3"),
         actionBtn: cn(
-          "px-2 py-1 text-sm font-medium rounded-md",
-          "bg-zinc-300 dark:bg-zinc-700",
+          "px-2 py-1 text-[12px] font-medium rounded-md",
+          "bg-zinc-200 dark:bg-zinc-700",
           "text-zinc-900 dark:text-zinc-100",
-          "hover:bg-zinc-400 dark:hover:bg-zinc-600",
+          "hover:bg-zinc-300 dark:hover:bg-zinc-600",
           "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400",
           "transition duration-200 ease-in-out",
         ),
-        closeBtn: cn("absolute top-0 right-0"),
+        closeBtn: cn(
+          "absolute items-center flex justify-center -top-2 -left-2 p-0.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors bg-zinc-200 dark:bg-zinc-800 p-0.5 border border-zinc-300 dark:border-zinc-500 hover:border-zinc-600 dark:hover:border-zinc-200 rounded-full",
+          "focus:outline-none",
+        ),
       },
-      icon: cn("flex-shrink-0 h-6 w-6"),
+      icon: cn("flex-shrink-0 mr-1"),
     },
+    defaultActionContent: (
+      <div className="flex items-center space-x-2">
+        <PartyPopperIcon size={16} />
+        <span>Confetti</span>
+      </div>
+    ),
+    defaultCloseContent: <XIcon size={12} />,
   };
 
   const handleAddStyles = () => {
     setApplyCustomTheme(toastStyles);
+    handleTryToast();
+  };
+
+  const handleTryToast = () => {
     toast.success({
-      text: "Custom styles added successfully",
-      description: "✨ Built with Tailwind CSS",
-      delayDuration: 40000,
+      text: "Custom styles",
+      description: "Built with Tailwind CSS",
+      delayDuration: 14000,
       action: {
-        content: "Hello",
         onClick: () => {
-          console.log("Hello, world!");
+          if (typeof window !== "undefined") {
+            const confetti = new JSConfetti();
+            confetti.addConfetti({
+              confettiRadius: 3,
+              confettiNumber: 100,
+              confettiColors: [
+                "#14532d",
+                "#ff477e",
+                "#f7f7f7",
+                "#ffcc00",
+                "#ffcc00",
+              ],
+            });
+          }
         },
       },
     });
@@ -74,16 +109,7 @@ const ToastCustomOptions = () => {
             <PaletteIcon size={14} />
             <span>Modify styles</span>
           </Button>
-          <Button
-            variant="outline"
-            onClick={() =>
-              toast.success({
-                text: "Hello, world!",
-                description: "👋 Welcome",
-                delayDuration: 20000,
-              })
-            }
-          >
+          <Button variant="outline" onClick={() => handleTryToast()}>
             <MessageSquareShareIcon size={14} />
             <span>Show Toast</span>
           </Button>
@@ -104,14 +130,21 @@ const ToastCustomOptions = () => {
     classNames: {
       toast: '${toastStyles.classNames?.toast}',
       container: '${toastStyles.classNames?.container}',
+      content: '${toastStyles.classNames?.content}',
       actions: {
         container: '${toastStyles.classNames?.actions?.container}',
         actionBtn: '${toastStyles.classNames?.actions?.actionBtn}',
         closeBtn: '${toastStyles.classNames?.actions?.closeBtn}',
       },
-      content: '${toastStyles.classNames?.content}',
       icon: '${toastStyles.classNames?.icon}',
     },
+    defaultActionContent: (
+      <div className="flex items-center space-x-2">
+        <PartyPopperIcon size={16} />
+        <span>Confetti</span>
+      </div>
+    ),
+    defaultCloseContent: <XIcon size={12} />,
   }}
 />;`}
         lang="tsx"

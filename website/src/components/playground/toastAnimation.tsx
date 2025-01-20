@@ -23,14 +23,14 @@ const ToastAnimation = () => {
       <div className="flex items-center space-x-2 overflow-y-auto">
         <Button
           variant="outline"
-          onClick={() => handleChangeAnimation("default")}
+          onClick={() => handleChangeAnimation("slide")}
         >
-          {toastAnimation === "default" ? (
+          {toastAnimation === "slide" ? (
             <CheckIcon size={14} />
           ) : (
             <ArrowDownUpIcon size={14} />
           )}
-          <span>Default</span>
+          <span>Slide</span>
         </Button>
         <Button
           variant="outline"
