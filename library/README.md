@@ -15,7 +15,7 @@
 
 <a href="https://toast.pheralb.dev/">Documentation</a>
 <span>&nbsp;&nbsp;✦&nbsp;&nbsp;</span>
-<a href="#-getting-started">Getting Started</a>
+<a href="https://toast.pheralb.dev/#getting-started">Getting Started</a>
 <span>&nbsp;&nbsp;✦&nbsp;&nbsp;</span>
 <a href="#-contributing">Contribute</a>
 <span>&nbsp;&nbsp;✦&nbsp;&nbsp;</span>
@@ -126,7 +126,7 @@ export default function Index() {
 
 [`pheralb/toast`](https://github.com/pheralb/toast) is a monorepo built with [Turbo](https://turbo.build/repo) and it uses:
 
-- [**Docs**](https://github.com/pheralb/toast/tree/main/docs): Next.js 15 + Content-Collections + MDX + shadcn/ui + Lucide + React-Symbols.
+- [**Website**](https://github.com/pheralb/toast/tree/main/website): Next.js 15 + Content-Collections + MDX + shadcn/ui + Lucide + React-Symbols.
 - [**Library**](https://github.com/pheralb/toast/tree/main/library): React 19 with tsup + Lightning CSS + Vitest for testing.
 
 1. [Click here to fork](https://github.com/pheralb/toast/fork) the repository.
