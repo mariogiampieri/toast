@@ -25,6 +25,16 @@
   --focus-color: #a3a3a3;
 }
 
+.t_dark-theme {
+  --box-shadow: rgba(0, 0, 0, 0.1);
+  --background-color: #171717;
+  --hover-bg-color: #27272a;
+  --border-color: #262626;
+  --text-color: #fafafa;
+  --description-color: #e5e5e5;
+  --focus-color: #404040;
+}
+
 /* System Dark Theme */
 @media (prefers-color-scheme: dark) {
   :where(.t_global) {
@@ -147,7 +157,7 @@
   width: 100%;
   max-width: 20rem;
   height: 100wh;
-  gap: 0.5rem;
+  gap: 0.6rem;
   padding: 12px;
   word-wrap: break-word;
   overflow-wrap: break-word;

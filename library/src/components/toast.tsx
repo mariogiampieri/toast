@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Error, Info, Loading, Success, Warning } from "../icons";
 import { useTimeout } from "../hooks/useTimeout";
-import { classNames, prefersReducedMotion } from "../utils";
+import { classNames, getSystemTheme, prefersReducedMotion } from "../utils";
 
 import { iconsColors, getAnimationClass } from "./default-options";
 
@@ -168,7 +168,7 @@ const Toast = (props: ToastComponentProps) => {
           props.toastPosition,
         ),
         !props.toastOptions?.headless && props.theme === "system"
-          ? "t_system-theme"
+          ? getSystemTheme()
           : "",
         !props.toastOptions?.headless && props.theme === "dark"
           ? "t_dark-theme"
