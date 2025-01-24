@@ -58,8 +58,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Vitest - Library
-        run: pnpm test
+      - name: Eslint
+        run: pnpm lint
 
   build:
     name: 🛫 Build Website & Library
