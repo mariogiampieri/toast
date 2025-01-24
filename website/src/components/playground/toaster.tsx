@@ -150,7 +150,7 @@ const ThemeExamples = () => {
             <span>system</span>
           </Button>
         </div>
-        <Button variant="ghost" onClick={() => handleChangeTheme(undefined)}>
+        <Button variant="outline" onClick={() => handleChangeTheme(undefined)}>
           <RefreshCcwIcon size={iconSize} />
           <span>reset</span>
         </Button>

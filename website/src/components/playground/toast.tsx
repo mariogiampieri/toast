@@ -68,8 +68,9 @@ export const ToastActionsExamples = () => {
     toast.default({
       text: `A toast with confetti 🎉`,
       description: "Click the button to see the confetti",
-      icon: <PartyPopperIcon size={14} />,
+      icon: <PartyPopperIcon size={18} />,
       action: {
+        content: "Show",
         onClick: () => {
           if (typeof window !== "undefined") {
             const confetti = new JSConfetti();
