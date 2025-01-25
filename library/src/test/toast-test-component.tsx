@@ -1,12 +1,12 @@
-import { toast } from '../main';
+import { toast } from "../main";
 
-const ToastTestComponent = () => {
+const ToastVariantComponent = () => {
   return (
     <button
       onClick={() =>
         toast.success({
-          text: 'Hello Toast!',
-          description: 'This is a success toast',
+          text: "Hello Toast!",
+          description: "This is a success toast",
         })
       }
     >
@@ -15,4 +15,25 @@ const ToastTestComponent = () => {
   );
 };
 
-export default ToastTestComponent;
+const ToastActionsComponent = () => {
+  return (
+    <button
+      onClick={() =>
+        toast.success({
+          text: "Hello Toast!",
+          description: "This is a success toast",
+          action: {
+            content: "Action",
+            onClick: () => {
+              console.log("Action clicked");
+            },
+          },
+        })
+      }
+    >
+      Show Toast
+    </button>
+  );
+};
+
+export { ToastVariantComponent, ToastActionsComponent };
