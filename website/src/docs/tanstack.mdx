@@ -31,7 +31,7 @@ pnpm create @tanstack/router
 
 2. Add the [`Toaster`](/toaster) to the `routes/__root.tsx` file:
 
-```tsx {13}
+```tsx {3,13}
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Toaster } from "@pheralb/toast";
@@ -53,7 +53,7 @@ function RootComponent() {
 
 3. Use the [`toast`](/toast) function in your components or pages:
 
-```tsx
+```tsx {2,14-16}
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "@pheralb/toast";
 
@@ -85,7 +85,7 @@ The library exports a CSS file that you can include in your project. Only use in
 
 > 💡 Add the following code to the **global `src/routes/__root.tsx` file**.
 
-```tsx
+```tsx {3,7}
 // 📄 src/routes/__root.tsx
 
 import pheralbToastStyles from "@pheralb/toast/dist/styles.css?url";

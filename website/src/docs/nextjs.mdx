@@ -35,7 +35,7 @@ npx create-next-app@latest
 
 > 💡 By default, `Toaster` includes `use client` directive.
 
-```tsx {1,13}
+```tsx {3,14}
 // 📃 layout.tsx
 
 import { Toaster } from "@pheralb/toast";
@@ -58,7 +58,7 @@ export default function RootLayout({
 
 3. Use the [`toast`](/toast) function in your **client** components:
 
-```tsx
+```tsx {9-11}
 "use client";
 
 import { toast } from "@pheralb/toast";
@@ -82,7 +82,7 @@ export default function MyComponent() {
 
 The library exports a CSS file that you can include in your project. Only use in cases where the toast styles do not render correctly:
 
-```tsx
+```tsx {5}
 // 📄 app/layout.tsx
 
 import type { ReactNode } from "react";
