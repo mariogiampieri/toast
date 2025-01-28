@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import { docsSettings } from "@/docs.config";
 
 // Styles:
 import "@/styles/globals.css";
 import { cn } from "@/utils/cn";
+import { fontHeadings, fontMono, fontSans } from "@/ui/fonts";
 
 // Fonts:
-import { Geist_Mono, Onest, Geist } from "next/font/google";
 
 // Providers:
 import { ThemeProvider } from "@/providers/themeProvider";
@@ -16,23 +17,8 @@ import ToasterProvider from "@/providers/toasterProvider";
 import Header from "@/components/layout/header";
 import { Sidebar } from "@/components/layout/sidebar/sidebar";
 
-const fontSans = Geist({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const fontHeadings = Onest({
-  variable: "--font-headings",
-  subsets: ["latin"],
-});
-
-const fontMono = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://toast.pheralb.dev"),
+  metadataBase: new URL(docsSettings.websiteUrl),
   icons: [
     { rel: "icon", type: "ico", url: "/images/favicon.ico" },
     { rel: "icon", type: "image/svg+xml", url: "/images/logo_svg.svg" },
@@ -49,8 +35,7 @@ export const metadata: Metadata = {
     default: "@pheralb/toast",
     template: "%s - @pheralb/toast",
   },
-  description:
-    "A lightweight, customizable, and dependency-free notification library for React.",
+  description: docsSettings.websiteDescription,
 };
 
 export default function RootLayout({
