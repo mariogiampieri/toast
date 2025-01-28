@@ -10,7 +10,7 @@ import {
 import { useState, useEffect, type ReactNode } from "react";
 
 import { cn } from "@/utils/cn";
-import { FileIcon } from "lucide-react";
+import { FileIcon, Loader } from "lucide-react";
 import CopyToClipboardBtn from "./copyToClipboard";
 import { Languages } from "./languages";
 
@@ -88,7 +88,9 @@ const CodeblockClient = ({ lang = "tsx", ...props }: CodeHighlightProps) => {
         </div>
       </div>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="flex items-center justify-center py-3">
+          <Loader size={16} className="animate-spin text-neutral-500" />
+        </div>
       ) : (
         <div
           className="overflow-y-auto bg-transparent"
