@@ -144,10 +144,36 @@ The library exports a CSS file that you can include in your project. Only use in
 // 📄 layout.astro
 
 ---
-import '@pheralb/toast/dist/styles.css';
+import "@pheralb/toast/dist/styles.css";
 ---
 
 <h2>hello</h2>
+```
+
+> 🛠️ Example with View Transitions:
+
+```js {2,4,15,19}
+---
+import { ClientRouter } from "astro:transitions";
+import { Toaster } from "@pheralb/toast";
+import "@pheralb/toast/dist/styles.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+    <Toaster client:load />
+  </body>
+</html>
 ```
 
 ✨ Ready.
