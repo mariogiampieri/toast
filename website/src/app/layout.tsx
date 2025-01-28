@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   title: {
     default: "@pheralb/toast",
-    template: "%s | @pheralb/toast",
+    template: "%s - @pheralb/toast",
   },
   description:
     "A lightweight, customizable, and dependency-free notification library for React.",

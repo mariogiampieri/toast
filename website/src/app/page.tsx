@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: `${document.title} - @pheralb/toast`,
+    title: `Getting Started - @pheralb/toast`,
     description: document.description,
   };
 }
