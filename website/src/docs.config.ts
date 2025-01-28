@@ -10,6 +10,13 @@ export interface iDocsRoutes {
   }[];
 }
 
+export const docsSettings = {
+  websiteUrl: "https://toast.pheralb.dev",
+  websiteDescription:
+    "An accessible and beautiful notification library for React.",
+  defaultOgImageUrl: "/images/og_image.png",
+};
+
 export const FrameworkGuides: iDocsRoutes[] = [
   {
     category: "Framework Guides",
