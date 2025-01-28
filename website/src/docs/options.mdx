@@ -82,17 +82,25 @@ By default, the animation when closing a toast is `slide` (`slide-down` or `slid
 />
 ```
 
-## Styling (experimental)
+## `classNames`
 
-> ⚠️ This feature is experimental and may change in the future. Use it with caution.
+You can extend the default styles of the toasts using the `classNames` property. For example, to change the background color of the toasts using [Tailwind CSS](https://tailwindcss.com/):
 
-To customize toasts with personalized styles:
+```tsx
+<Toaster
+  toastOptions={{
+    classNames: {
+      toast: "bg-zinc-100 dark:bg-zinc-900",
+    },
+  }}
+/>
+```
 
-1. Activate the `headless` property.
-2. It's recommended to use [`defaultActionContent` and `defaultCloseContent`](#actions-buttons) to modify the content of the buttons (add text or React components).
-3. Use the `classNames` property.
+## `headless`
 
-<ToastCustomOptions client:load />
+Disable all default styles using `headless` property. It works together with `classNames`. For example, to create a custom toast with [Tailwind CSS](https://tailwindcss.com/):
+
+<ToastHeadless />
 
 > 💡 [View the example on GitHub](https://github.com/pheralb/toast/blob/main/website/src/components/playground/toastCustomOptions.tsx#L14).
 
@@ -113,8 +121,8 @@ To customize toasts with personalized styles:
 
 | Property    | Description                           | Type     | Required |
 | ----------- | ------------------------------------- | -------- | -------- |
-| `toast`     | Global toast style                    | `string` | ✅       |
-| `container` | Toast container styles                | `string` | ✅       |
-| `icon`      | Styles for the main icon of the toast | `string` | ✅       |
-| `content`   | Styles for title and description      | `string` | ✅       |
-| `actions`   | Styles for the buttons                | `string` | ✅       |
+| `toast`     | Global toast style                    | `string` | -        |
+| `container` | Toast container styles                | `string` | -        |
+| `icon`      | Styles for the main icon of the toast | `string` | -        |
+| `content`   | Styles for title and description      | `string` | -        |
+| `actions`   | Styles for the buttons                | `string` | -        |
