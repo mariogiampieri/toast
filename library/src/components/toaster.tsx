@@ -6,7 +6,7 @@ import type {
 } from "../types/toast.types";
 
 import ToastComponent from "./toast";
-import { classNames, generateRandomId } from "../utils";
+import { cn, generateRandomId } from "../utils";
 
 // Ensure openToastGlobal is initialized correctly
 let openToastGlobal: (data: ToastPropsWithVariant) => void;
@@ -64,7 +64,7 @@ export const Toaster = ({
         aria-label="Toast Notifications"
         role="alert"
         aria-live="polite"
-        className={classNames(
+        className={cn(
           "t_toasts",
           position === "top-left" ? "t_top-left" : "",
           position === "top-right" ? "t_top-right" : "",

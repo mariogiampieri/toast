@@ -1,12 +1,9 @@
-// Classnames utility function (like classnames npm package):
 export const cn = (...classes: (string | undefined)[]) => {
   return classes.filter(Boolean).join(" ");
 };
 
-// Generating random id:
 export const generateRandomId = () => Math.floor(Math.random() * 1000000);
 
-// Disable transitions when prefers reduced motion is enabled:
 export const prefersReducedMotion = (() => {
   let shouldReduceMotion: boolean | undefined = undefined;
   return () => {

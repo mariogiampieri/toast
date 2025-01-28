@@ -45,11 +45,11 @@ interface ToastActionsCustomClassnames {
 }
 
 export interface ToastClassnames {
-  toast: string;
-  container: string;
-  icon: string;
-  content: string;
-  actions: ToastActionsCustomClassnames;
+  toast?: string;
+  container?: string;
+  icon?: string;
+  content?: string;
+  actions?: ToastActionsCustomClassnames;
 }
 
 export type ToastAnimations = "slide" | "swipe";
@@ -59,9 +59,9 @@ export type ToastOptions = {
   font?: string;
   icons?: ToastIcons;
   headless?: boolean;
+  classNames?: ToastClassnames;
   defaultActionContent?: string | ReactNode;
   defaultCloseContent?: string | ReactNode;
-  classNames?: ToastClassnames;
 };
 
 export type ToasterProperties = {

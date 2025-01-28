@@ -41,8 +41,6 @@ const ANIMATION_SWIPE_EXIT_MAP: Record<Position, string> = {
   "bottom-center": "t_swipe-exit-center",
 };
 
-/* Utility function to get the animation class */
-
 export const getAnimationClass = (
   isExiting: boolean,
   animationType: ToastAnimations,
