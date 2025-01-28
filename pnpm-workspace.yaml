@@ -1,4 +1,3 @@
 packages:
-  - 'website'
-  - 'library'
-  - 'examples/*'
+  - "website"
+  - "library"
