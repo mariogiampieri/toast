@@ -1,5 +1,5 @@
-import { Logo } from "@/ui/icons";
 import type { Doc } from "content-collections";
+import { Logo } from "@/ui/icons";
 
 interface iDocumentOGTemplate {
   document: Doc;
@@ -14,9 +14,8 @@ const DocumentOGTemplate = (props: iDocumentOGTemplate) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#171717",
-        color: "#fff",
-        border: "2px solid #2b2b2b",
+        backgroundColor: "#FAFAFA",
+        color: "#121212",
         paddingTop: "40px",
         paddingBottom: "76px",
         paddingLeft: "64px",
@@ -38,7 +37,7 @@ const DocumentOGTemplate = (props: iDocumentOGTemplate) => {
             fontFamily: "Geist",
           }}
         >
-          @pheralb/toast
+          pheralb/toast
         </h2>
       </div>
       <div
@@ -64,7 +63,7 @@ const DocumentOGTemplate = (props: iDocumentOGTemplate) => {
         <p
           style={{
             fontSize: "38px",
-            color: "#9ca3af",
+            color: "#89909c",
             margin: "0px",
             fontWeight: "normal",
             fontFamily: "Geist",

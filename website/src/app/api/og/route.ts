@@ -1,10 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
 import fs from "fs/promises";
 import path from "path";
 
 import { ImageResponse } from "next/og";
 import { allDocs } from "content-collections";
 import DocumentOGTemplate from "@/components/ogImage";
+
+const cacheTime = 60 * 60 * 24 * 7;
+const cacheControl = `public, no-transform, max-age=${cacheTime}, immutable`;
+const activateDynamicOg = process.env.ACTIVATE_DYNAMIC_OG_IMAGES;
+const isDevMode = process.env.NODE_ENV === "development";
 
 const searchDocument = (document: string) => {
   return allDocs.find((doc) => doc.slug === document);
@@ -22,6 +26,10 @@ export async function GET(request: Request) {
 
   if (!docData) {
     return new Response("Document not found", { status: 404 });
+  }
+
+  if (!activateDynamicOg || activateDynamicOg === "false") {
+    return new Response("OG Image generation is disabled", { status: 404 });
   }
 
   return new ImageResponse(
@@ -47,6 +55,9 @@ export async function GET(request: Request) {
           ),
         },
       ],
+      headers: {
+        "Cache-Control": isDevMode ? "no-cache" : cacheControl,
+      },
     },
   );
 }

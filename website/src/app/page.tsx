@@ -8,11 +8,13 @@ import Article from "@/components/article/content";
 
 import { TableOfContents } from "@/components/layout/tableOfContents/toc";
 import ResponsiveTocMenu from "@/components/layout/tableOfContents/responsiveTocMenu";
+import { docsSettings } from "@/docs.config";
 
 const indexPage = "index";
 
 export async function generateMetadata(): Promise<Metadata> {
   const document = allDocs.find((post) => post.slug === indexPage);
+  const activateDynamicOg = process.env.ACTIVATE_DYNAMIC_OG_IMAGES === "true";
 
   if (!document) {
     return notFound();
@@ -21,6 +23,20 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Getting Started - @pheralb/toast`,
     description: document.description,
+    openGraph: {
+      type: "website",
+      url: docsSettings.websiteUrl,
+      title: `Getting Started - @pheralb/toast`,
+      description: document.description,
+      siteName: docsSettings.websiteUrl,
+      images: [
+        {
+          url: activateDynamicOg
+            ? new URL(`/api/og?document=${indexPage}`, docsSettings.websiteUrl)
+            : new URL(docsSettings.defaultOgImageUrl, docsSettings.websiteUrl),
+        },
+      ],
+    },
   };
 }
 
