@@ -18,6 +18,56 @@ const Logo: FC<ComponentProps<"svg">> = (props) => (
   </svg>
 );
 
+const LogoBackground: FC<ComponentProps<"svg">> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 512 512"
+    {...props}
+  >
+    <rect
+      id="r9"
+      width="512"
+      height="512"
+      x="0"
+      y="0"
+      fill="url(#ra)"
+      stroke="#FFF"
+      strokeOpacity="100%"
+      strokeWidth="0"
+      paintOrder="stroke"
+      rx="128"
+    ></rect>
+    <defs>
+      <radialGradient
+        id="ra"
+        cx="50%"
+        cy="50%"
+        r="100%"
+        fx="50%"
+        fy="0%"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop stopColor="#222"></stop>
+        <stop offset="1"></stop>
+      </radialGradient>
+    </defs>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="360"
+      height="360"
+      x="76"
+      y="76"
+      fill="#f7f7f7"
+      alignmentBaseline="middle"
+      color="#E6E6E6"
+      viewBox="0 0 256 256"
+    >
+      <path d="M223.05 69.33a6 6 0 0 1-8.05-2.57 96 96 0 0 0-34.2-37.68 6 6 0 0 1 6.4-10.15 109.26 109.26 0 0 1 38.41 42.31 6 6 0 0 1-2.56 8.09M41 66.76a96 96 0 0 1 34.2-37.68 6 6 0 0 0-6.4-10.15 109.26 109.26 0 0 0-38.41 42.31A6 6 0 1 0 41 66.76m179 110.18A14 14 0 0 1 208 198h-42.5a38 38 0 0 1-75 0H48a14 14 0 0 1-12.06-21.06C45.13 161.09 50 138.63 50 112a78 78 0 0 1 156 0c0 27 4.74 48.86 14.08 64.94ZM153.29 198h-50.58a26 26 0 0 0 50.58 0m56.42-15C199.29 165 194 141.15 194 112a66 66 0 0 0-132 0c0 29.16-5.29 53-15.71 71a2 2 0 0 0 0 2 1.9 1.9 0 0 0 1.7 1H208a1.9 1.9 0 0 0 1.7-1 2 2 0 0 0 .01-2"></path>
+    </svg>
+  </svg>
+);
+
 export const SparkleSvg = ({
   position,
   className,
@@ -538,4 +588,15 @@ const TanStack = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export { X, Logo, Github, Nextjs, Remix, Astro, NPM, TailwindCSS, TanStack };
+export {
+  X,
+  Logo,
+  LogoBackground,
+  Github,
+  Nextjs,
+  Remix,
+  Astro,
+  NPM,
+  TailwindCSS,
+  TanStack,
+};
