@@ -31,7 +31,7 @@ const CodeblockMDX = (props: PreProps) => {
         </div>
         <CopyToClipboardBtn content={rawstring} />
       </div>
-      <pre className="overflow-x-auto rounded-t-none bg-transparent" {...props}>
+      <pre className="overflow-x-auto rounded-t-none bg-transparent">
         {children}
       </pre>
     </div>
