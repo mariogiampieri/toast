@@ -15,7 +15,7 @@ import Codeblock from "@/components/codeblock/client";
 
 import { Button } from "@/ui/button";
 
-const ToastCustomOptions = () => {
+const ToastHeadless = () => {
   const { applyCustomTheme, setApplyCustomTheme } = useDocsStore();
 
   const toastStyles: ToastOptions = {
@@ -30,9 +30,7 @@ const ToastCustomOptions = () => {
         "relative flex items-center",
       ),
       container: cn("flex items-center py-4 space-x-2 px-4 w-full"),
-      content: cn(
-        "flex flex-col space-y-0.5 mr-2 [p:nth-child(1)]:text-red-500 dark:[p:nth-child(1)]:text-red-400",
-      ),
+      content: cn("flex flex-col space-y-0.5 mr-2"),
       actions: {
         container: cn("flex flex-col px-3"),
         actionBtn: cn(
@@ -66,8 +64,8 @@ const ToastCustomOptions = () => {
 
   const handleTryToast = () => {
     toast.success({
-      text: "Custom styles",
-      description: "Built with Tailwind CSS",
+      text: "Headless Toast",
+      description: "with Tailwind CSS",
       delayDuration: 14000,
       action: {
         onClick: () => {
@@ -153,4 +151,4 @@ const ToastCustomOptions = () => {
   );
 };
 
-export default ToastCustomOptions;
+export default ToastHeadless;

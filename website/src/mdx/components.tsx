@@ -6,7 +6,6 @@ import InstallLibrary from "@/components/installLibrary";
 import FrameworkGuidesComponent from "@/components/frameworkGuides";
 
 // Playground Components:
-import ToastCustomOptions from "@/components/playground/toastCustomOptions";
 import {
   ToastVariantExamples,
   ToastActionsExamples,
@@ -14,6 +13,7 @@ import {
 } from "@/components/playground/toast";
 import { Positions, ThemeExamples } from "@/components/playground/toaster";
 import ToastAnimation from "@/components/playground/toastAnimation";
+import ToastHeadless from "@/components/playground/toastHeadless";
 
 // Local Components:
 import CodeblockMDX from "@/components/codeblock/mdx";
@@ -34,7 +34,7 @@ export function MDX(props: MDXComponentsProps) {
         Hero,
         Positions,
         ThemeExamples,
-        ToastCustomOptions,
+        ToastHeadless,
         ToastVariantExamples,
         ToastActionsExamples,
         ToastLoadingExample,

@@ -12,9 +12,9 @@ const ToastAnimation = () => {
 
   const handleChangeAnimation = (animation: ToastAnimations) => {
     setToastAnimation(animation);
-    toast.default({
-      text: `A default toast 🚀`,
-      description: `✨ @pheralb/toast`,
+    toast.info({
+      text: `Close me 👀`,
+      description: `✨ ${animation} animation`,
     });
   };
 
