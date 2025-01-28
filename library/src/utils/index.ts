@@ -1,29 +1,6 @@
-type ClassValue =
-  | string
-  | boolean
-  | null
-  | undefined
-  | ClassValue[]
-  | { [key: string]: boolean };
-
 // Classnames utility function (like classnames npm package):
-export const classNames = (...classes: ClassValue[]): string => {
-  const result: string[] = [];
-  const processClassValue = (value: ClassValue) => {
-    if (typeof value === "string" && value) {
-      result.push(value);
-    } else if (Array.isArray(value)) {
-      value.forEach(processClassValue);
-    } else if (typeof value === "object" && value !== null) {
-      for (const key in value) {
-        if (Object.prototype.hasOwnProperty.call(value, key) && value[key]) {
-          result.push(key);
-        }
-      }
-    }
-  };
-  classes.forEach(processClassValue);
-  return result.join(" ");
+export const cn = (...classes: (string | undefined)[]) => {
+  return classes.filter(Boolean).join(" ");
 };
 
 // Generating random id:
