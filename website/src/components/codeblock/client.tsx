@@ -1,6 +1,12 @@
 "use client";
 
-import { createHighlighter, makeSingletonHighlighter } from "shiki/bundle/web";
+import {
+  BundledLanguage,
+  BundledTheme,
+  createHighlighter,
+  type HighlighterGeneric,
+} from "shiki/bundle/web";
+
 import { useState, useEffect, type ReactNode } from "react";
 
 import { cn } from "@/utils/cn";
@@ -18,19 +24,30 @@ interface CodeHighlightProps {
   children?: ReactNode;
 }
 
+let highlighterInstance: HighlighterGeneric<
+  BundledLanguage,
+  BundledTheme
+> | null = null;
+
+const getHighlighter = async () => {
+  if (!highlighterInstance) {
+    highlighterInstance = await createHighlighter({
+      themes: ["github-light", "github-dark"],
+      langs: ["bash", "tsx"],
+    });
+  }
+  return highlighterInstance;
+};
+
 const CodeblockClient = ({ lang = "tsx", ...props }: CodeHighlightProps) => {
   const [highlightedCode, setHighlightedCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const getHighlighter = makeSingletonHighlighter(createHighlighter);
   const selectedLanguage = Languages.find((langData) => langData.name === lang);
 
   useEffect(() => {
     async function highlightCode() {
-      const highlighter = await getHighlighter({
-        themes: ["github-light", "github-dark"],
-        langs: ["bash", "tsx"],
-      });
       try {
+        const highlighter = await getHighlighter();
         const html = await highlighter.codeToHtml(props.code, {
           lang,
           themes: {
@@ -50,7 +67,7 @@ const CodeblockClient = ({ lang = "tsx", ...props }: CodeHighlightProps) => {
       }
     }
     highlightCode();
-  }, [props.code, getHighlighter, lang]);
+  }, [props.code, lang]);
 
   return (
     <div className={cn("relative", props.className)}>
