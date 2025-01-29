@@ -1,15 +1,15 @@
-name: ⚙️ Release
+name: 🚀 Release
 
 on:
-  workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: 📦 Release
+    name: 🧑‍🚀 Publish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
