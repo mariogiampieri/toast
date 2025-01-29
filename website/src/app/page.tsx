@@ -6,7 +6,7 @@ import { MDX } from "@/mdx/components";
 
 import Article from "@/components/article/content";
 
-import { TableOfContents } from "@/components/layout/tableOfContents/toc";
+import TableOfContents from "@/components/layout/tableOfContents/toc";
 import ResponsiveTocMenu from "@/components/layout/tableOfContents/responsiveTocMenu";
 import { docsSettings } from "@/docs.config";
 

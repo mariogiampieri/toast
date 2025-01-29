@@ -7,7 +7,7 @@ import {
 } from "@/ui/sheet";
 import { buttonVariants } from "@/ui/button";
 import { MenuIcon } from "lucide-react";
-import { TocMenu } from "./toc";
+import TocMenu from "./tocMenu";
 import { TableOfContentsProps } from "./types";
 
 const ResponsiveTocMenu = (props: TableOfContentsProps) => {
