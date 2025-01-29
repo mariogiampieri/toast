@@ -1,49 +1,68 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from "react";
 
-export const useTimeout = (callbackFn: () => void, delay: number) => {
-  const [remainingTime, setRemainingTime] = useState<number>(delay);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const timerIdRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number | null>(null);
+interface UseTimeoutReturn {
+  pause: () => void;
+  resume: () => void;
+  reset: () => void;
+  isActive: boolean;
+}
 
-  const startTimer = () => {
-    if (timerIdRef.current !== null) return;
+export const useTimeout = (
+  callback: () => void,
+  delay: number,
+): UseTimeoutReturn => {
+  const timeoutRef = useRef<number>(0);
+  const callbackRef = useRef(callback);
+  const startTimeRef = useRef<number>(0);
+  const remainingRef = useRef(delay);
+  const isActiveRef = useRef(true);
 
-    startTimeRef.current = Date.now();
-    timerIdRef.current = window.setTimeout(() => {
-      callbackFn();
-      timerIdRef.current = null;
-    }, remainingTime);
-  };
-
-  const clearTimer = () => {
-    if (timerIdRef.current !== null) {
-      window.clearTimeout(timerIdRef.current);
-      timerIdRef.current = null;
+  const cleanup = useCallback(() => {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
     }
-  };
-
-  const pauseTimer = () => {
-    if (timerIdRef.current !== null && startTimeRef.current !== null) {
-      clearTimer();
-      const elapsedTime = Date.now() - startTimeRef.current;
-      setRemainingTime(remainingTime - elapsedTime);
-      setIsPaused(true);
-    }
-  };
-
-  const resumeTimer = () => {
-    if (isPaused) {
-      startTimer();
-      setIsPaused(false);
-    }
-  };
-
-  useEffect(() => {
-    startTimer();
-
-    return () => clearTimer();
   }, []);
 
-  return { pauseTimer, resumeTimer, clearTimer };
+  const pause = useCallback(() => {
+    if (!isActiveRef.current || !startTimeRef.current) return;
+
+    cleanup();
+    remainingRef.current -= Date.now() - startTimeRef.current;
+    isActiveRef.current = false;
+  }, [cleanup]);
+
+  const resume = useCallback(() => {
+    if (isActiveRef.current) return;
+
+    startTimeRef.current = Date.now();
+    timeoutRef.current = window.setTimeout(
+      callbackRef.current,
+      remainingRef.current,
+    );
+    isActiveRef.current = true;
+  }, []);
+
+  const reset = useCallback(() => {
+    cleanup();
+    remainingRef.current = delay;
+    startTimeRef.current = Date.now();
+    timeoutRef.current = window.setTimeout(callbackRef.current, delay);
+    isActiveRef.current = true;
+  }, [cleanup, delay]);
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    reset();
+    return cleanup;
+  }, [delay, reset, cleanup]);
+
+  return {
+    pause,
+    resume,
+    reset,
+    isActive: isActiveRef.current,
+  };
 };

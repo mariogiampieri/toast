@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+
 import type {
   ToastPropsWithVariant,
   ToasterProperties,
-} from '../types/toast.types';
+} from "../types/toast.types";
 
-import '../styles/toast-context.css';
-
-import ToastComponent from './toast';
-import { classNames, generateRandomId } from '../utils';
+import ToastComponent from "./toast";
+import { cn, generateRandomId } from "../utils";
 
 // Ensure openToastGlobal is initialized correctly
 let openToastGlobal: (data: ToastPropsWithVariant) => void;
 
 export const Toaster = ({
   maxToasts = 4,
-  position = 'bottom-right',
-  theme = 'system',
-  toastFont,
+  position = "bottom-right",
+  theme = "system",
+  toastOptions,
 }: ToasterProperties) => {
   const [toasts, setToasts] = useState<ToastPropsWithVariant[]>([]);
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -32,27 +31,20 @@ export const Toaster = ({
       id: generateRandomId(),
     };
     setToasts((prevToasts) => {
+      const isTopPosition =
+        position === "top-left" ||
+        position === "top-right" ||
+        position === "top-center";
+
       if (prevToasts.length >= maxToasts) {
-        if (
-          position === 'top-left' ||
-          position === 'top-right' ||
-          position === 'top-center'
-        ) {
-          return [newToast, ...prevToasts.slice(0, prevToasts.length - 1)];
-        } else {
-          return [...prevToasts.slice(1), newToast];
-        }
-      } else {
-        if (
-          position === 'top-left' ||
-          position === 'top-right' ||
-          position === 'top-center'
-        ) {
-          return [newToast, ...prevToasts];
-        } else {
-          return [...prevToasts, newToast];
-        }
+        return isTopPosition
+          ? [newToast, ...prevToasts.slice(0, -1)]
+          : [...prevToasts.slice(1), newToast];
       }
+
+      return isTopPosition
+        ? [newToast, ...prevToasts]
+        : [...prevToasts, newToast];
     });
   };
 
@@ -70,17 +62,17 @@ export const Toaster = ({
     toasts.length > 0 && (
       <section
         aria-label="Toast Notifications"
-        role="region"
+        role="alert"
         aria-live="polite"
-        className={classNames(
-          't_toasts',
-          position === 'top-left' ? 't_top-left' : '',
-          position === 'top-right' ? 't_top-right' : '',
-          position === 'top-center' ? 't_top-center' : '',
-          position === 'bottom-left' ? 't_bottom-left' : '',
-          position === 'bottom-right' ? 't_bottom-right' : '',
-          position === 'bottom-center' ? 't_bottom-center' : '',
-          toastFont ? toastFont : 't_default_font',
+        className={cn(
+          "t_toasts",
+          position === "top-left" ? "t_top-left" : "",
+          position === "top-right" ? "t_top-right" : "",
+          position === "top-center" ? "t_top-center" : "",
+          position === "bottom-left" ? "t_bottom-left" : "",
+          position === "bottom-right" ? "t_bottom-right" : "",
+          position === "bottom-center" ? "t_bottom-center" : "",
+          toastOptions?.font ? toastOptions?.font : "t_default_font",
         )}
       >
         {toasts.map((toast) => (
@@ -89,6 +81,8 @@ export const Toaster = ({
             theme={theme}
             toastPosition={position}
             onClose={() => closeToast(toast.id!)}
+            toastOptions={toastOptions}
+            active={toasts.indexOf(toast) === toasts.length - 1}
             {...toast}
           />
         ))}
@@ -98,12 +92,13 @@ export const Toaster = ({
 };
 
 // Export the openToast function:
+// eslint-disable-next-line react-refresh/only-export-components
 export const openToast = (data: ToastPropsWithVariant): void => {
   if (openToastGlobal) {
     openToastGlobal(data);
   } else {
     console.error(
-      '🔔 <Toaster /> component is not mounted. Check toast.pheralb.dev/toaster for more information.',
+      "🔔 <Toaster /> component is not mounted. Check toast.pheralb.dev/toaster for more information.",
     );
   }
 };

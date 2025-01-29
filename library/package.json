@@ -1,14 +1,23 @@
 {
   "name": "@pheralb/toast",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "author": "@pheralb_",
+  "description": "A lightweight, customizable, and dependency-free notification library for React.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pheralb/toast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pheralb/toast/issues"
+  },
   "keywords": [
     "react",
     "react-component",
     "toast",
     "notification",
     "no-dependencies",
-    "lightweight"
+    "lightweight",
+    "customizable"
   ],
   "private": false,
   "license": "MIT",
@@ -20,41 +29,46 @@
       "require": "./dist/main.cjs",
       "import": "./dist/main.js",
       "types": "./dist/main.d.ts"
-    }
+    },
+    "./dist/styles.css": "./dist/styles.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc && tsup",
+    "build": "pnpm build:library && pnpm build:styles",
+    "build:library": "tsc && tsup",
+    "build:styles": "lightningcss --minify --bundle ./src/styles/globals.css -o ./dist/styles.css",
     "dev": "tsup --watch",
     "test": "vitest run --config ./vitest.config.ts",
     "test:watch": "vitest --watch",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint ./src",
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "6.4.6",
-    "@testing-library/react": "16.0.0",
-    "@types/node": "20.14.9",
-    "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
-    "@typescript-eslint/eslint-plugin": "7.14.1",
-    "@typescript-eslint/parser": "7.14.1",
-    "@vitejs/plugin-react-swc": "3.7.0",
-    "eslint": "8.57.0",
-    "eslint-plugin-jsx-a11y": "6.9.0",
-    "eslint-plugin-react-hooks": "4.6.2",
-    "eslint-plugin-react-refresh": "0.4.7",
-    "jsdom": "24.1.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "tsup": "8.1.0",
-    "typescript": "5.5.2",
-    "vitest": "1.6.0"
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.2.0",
+    "@types/node": "20.17.16",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "@typescript-eslint/eslint-plugin": "8.22.0",
+    "@typescript-eslint/parser": "8.22.0",
+    "eslint": "9.19.0",
+    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-react-refresh": "0.4.18",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "globals": "15.14.0",
+    "jsdom": "26.0.0",
+    "lightningcss-cli": "1.29.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "tsup": "8.3.6",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.22.0",
+    "vitest": "3.0.4"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }

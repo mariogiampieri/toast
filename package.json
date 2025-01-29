@@ -3,10 +3,14 @@
   "author": "@pheralb_",
   "private": true,
   "license": "MIT",
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "dev:docs": "turbo dev --filter=@pheralb/toast-docs",
+    "dev:docs": "turbo dev --filter=@pheralb/toast-website",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
@@ -17,13 +21,10 @@
     "release": "turbo run build --filter=@pheralb/toast && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.6",
-    "prettier": "3.3.2",
-    "prettier-plugin-tailwindcss": "0.6.5",
+    "@changesets/cli": "2.27.11",
+    "prettier": "3.4.2",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.6.9",
     "turbo": "latest"
-  },
-  "packageManager": "pnpm@8.9.0",
-  "engines": {
-    "node": ">=20"
   }
 }

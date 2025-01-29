@@ -1,0 +1,354 @@
+/* Global Theme Styles */
+:root {
+  /* Animation Duration */
+  --pheralb-toast-animation-enter: 0.4s;
+  --pheralb-toast-animation-exit: 0.4s;
+}
+
+:where(.t_global) {
+  --box-shadow: rgba(0, 0, 0, 0.1);
+  --background-color: #ffffff;
+  --hover-bg-color: #f5f5f5;
+  --border-color: #e5e5e5;
+  --text-color: #171717;
+  --description-color: #262626;
+  --focus-color: #a3a3a3;
+}
+
+.t_light-theme {
+  --box-shadow: rgba(0, 0, 0, 0.1);
+  --background-color: #ffffff;
+  --hover-bg-color: #f5f5f5;
+  --border-color: #e5e5e5;
+  --text-color: #171717;
+  --description-color: #262626;
+  --focus-color: #a3a3a3;
+}
+
+.t_dark-theme {
+  --box-shadow: rgba(0, 0, 0, 0.1);
+  --background-color: #171717;
+  --hover-bg-color: #27272a;
+  --border-color: #262626;
+  --text-color: #fafafa;
+  --description-color: #e5e5e5;
+  --focus-color: #404040;
+}
+
+/* System Dark Theme */
+@media (prefers-color-scheme: dark) {
+  :where(.t_global) {
+    --box-shadow: rgba(0, 0, 0, 0.1);
+    --background-color: #171717;
+    --hover-bg-color: #27272a;
+    --border-color: #262626;
+    --text-color: #fafafa;
+    --description-color: #e5e5e5;
+    --focus-color: #404040;
+  }
+}
+
+/** Toaster Provider Styles: */
+
+.t_toasts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  position: fixed;
+  z-index: 999;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  width: 100%;
+}
+
+.t_default_font {
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
+}
+
+.t_top-left {
+  top: 0;
+  left: 0;
+}
+
+.t_top-right {
+  top: 0;
+  right: 0;
+}
+
+.t_top-center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.t_bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.t_bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.t_bottom-center {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (min-width: 768px) {
+  .t_toasts {
+    max-width: 355px;
+  }
+}
+
+/** Toast Component Styles: */
+
+.t_global {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  background-color: var(--background-color);
+  width: auto;
+  box-shadow:
+    0 1px 3px 0 var(--box-shadow),
+    0 1px 2px -1px var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  overflow: hidden;
+}
+
+.t_global button {
+  border: none;
+  outline: none;
+}
+
+.t_global button:focus {
+  outline: 1px solid var(--focus-color);
+  outline-offset: 0px;
+  background-color: var(--hover-color);
+}
+
+.t_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 20rem;
+  height: 100wh;
+  gap: 0.6rem;
+  padding: 12px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.t_icon {
+  fill: var(--text-color);
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.t_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.t_content p {
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.t_content p:nth-of-type(2) {
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--description-color);
+}
+
+.t_actions {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border-color);
+  height: 100wh;
+}
+
+.t_actions > button {
+  flex: 1 1 0%;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-size: 13px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.t_actions > button:nth-child(1) {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.t_actions > button:nth-child(2) {
+  color: var(--text-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.t_actions > button:hover {
+  background-color: var(--hover-color);
+}
+
+/** Toast Loading State **/
+
+.t_loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/** Default Toast Enter Animations **/
+
+.t_slide-enter-top {
+  animation: slide-top var(--pheralb-toast-animation-enter) ease;
+}
+
+@keyframes slide-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.t_slide-enter-bottom {
+  animation: slide-bottom var(--pheralb-toast-animation-enter) ease;
+}
+
+@keyframes slide-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/** Default Toast Exit Animations **/
+
+.t-slide-exit-top,
+.t-slide-exit-bottom {
+  will-change: transform, opacity;
+}
+
+.t-slide-exit-top {
+  animation: slide-top-exit var(--pheralb-toast-animation-exit) ease;
+}
+
+@keyframes slide-top-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.t-slide-exit-bottom {
+  animation: slide-bottom-exit var(--pheralb-toast-animation-exit) ease;
+}
+
+@keyframes slide-bottom-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+/** Swipe Exit Animations **/
+
+.t_swipe-exit-center {
+  animation: swipe-center-exit var(--pheralb-toast-animation-exit) ease;
+}
+
+@keyframes swipe-center-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.t_swipe-exit-left {
+  animation: swipe-left-exit var(--pheralb-toast-animation-exit) ease;
+}
+
+@keyframes swipe-left-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.t_swipe-exit-right {
+  animation: swipe-right-exit var(--pheralb-toast-animation-exit) ease;
+}
+
+@keyframes swipe-right-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
