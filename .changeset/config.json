@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@pheralb/toast-docs", "@pheralb-toast/nextjs-example"]
+  "ignore": ["@pheralb/toast-website", "@pheralb/toast-example-astro"]
 }
