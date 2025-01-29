@@ -9,6 +9,7 @@ import ExternalLink from "@/ui/externalLink";
 import { ModeToggle } from "../modeToggle";
 import SearchModal from "../search";
 import ResponsiveSidebarMenu from "./sidebar/responsiveSidebarMenu";
+import Customizer from "../playground/customizer/customizer";
 
 const Header = () => {
   return (
@@ -51,6 +52,7 @@ const Header = () => {
               </ExternalLink>
             )),
           )}
+          <Customizer />
           <SearchModal />
           <ModeToggle />
         </div>

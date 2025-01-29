@@ -36,6 +36,7 @@ const Footer = async () => {
         </ExternalLink>
       </div>
       <a
+        title="Report a bug"
         href="https://github.com/pheralb/toast/issues/new"
         target="_blank"
         rel="noreferrer"
@@ -54,6 +55,7 @@ const Footer = async () => {
         strokeIcon={strokeIcon}
       />
       <a
+        title="Built by pheralb"
         href="https://pheralb.dev"
         target="_blank"
         rel="noreferrer"

@@ -26,7 +26,7 @@ const EditThisPage = (props: EditThisPageProps) => {
 
   return (
     <ExternalLink
-      title="Found a bug?"
+      title="Edit this page"
       href={getUrl()}
       className={cn(props.className)}
     >

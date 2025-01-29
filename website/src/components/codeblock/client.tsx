@@ -20,6 +20,7 @@ type Languages = "bash" | "tsx";
 interface CodeHighlightProps {
   code: string;
   lang: Languages;
+  noProseStyles?: boolean;
   className?: string;
   children?: ReactNode;
 }
@@ -93,7 +94,11 @@ const CodeblockClient = ({ lang = "tsx", ...props }: CodeHighlightProps) => {
         </div>
       ) : (
         <div
-          className="overflow-y-auto bg-transparent"
+          className={cn(
+            "overflow-y-auto bg-transparent",
+            props.noProseStyles &&
+              "rounded-b-sm border-x border-y border-neutral-200 p-3 font-mono text-sm dark:border-neutral-800",
+          )}
           dangerouslySetInnerHTML={{ __html: highlightedCode }}
         />
       )}
