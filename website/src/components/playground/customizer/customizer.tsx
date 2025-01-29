@@ -59,18 +59,18 @@ const Customizer = () => {
           className="w-full overflow-y-auto border-b border-dashed border-neutral-200 pb-3 dark:border-neutral-800"
         >
           <TabsList className="w-full">
-            <TabsTrigger value="animations">Animations</TabsTrigger>
             <TabsTrigger value="positions">Positions</TabsTrigger>
+            <TabsTrigger value="animations">Animations</TabsTrigger>
             <TabsTrigger value="theme">Theme</TabsTrigger>
           </TabsList>
-          <TabsContent value="animations">
-            <CustomizerBlock docUrl="/options#animationonclose">
-              <ToastAnimationsCustomizer />
-            </CustomizerBlock>
-          </TabsContent>
           <TabsContent value="positions">
             <CustomizerBlock docUrl="/toaster#position">
               <ToastPositionsCustomizer />
+            </CustomizerBlock>
+          </TabsContent>
+          <TabsContent value="animations">
+            <CustomizerBlock docUrl="/options#animationonclose">
+              <ToastAnimationsCustomizer />
             </CustomizerBlock>
           </TabsContent>
           <TabsContent value="theme">
