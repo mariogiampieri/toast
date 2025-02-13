@@ -1,7 +1,7 @@
 ---
-title: 'Dark Mode'
-description: 'This page shows examples of how to use next-themes (Next.js) or remix-themes (Remix) libraries'
-category: 'Customization'
+title: "Dark Mode"
+description: "This page shows examples of how to use next-themes (Next.js) or remix-themes (Remix) libraries"
+category: "Customization"
 ---
 
 > 💡 If you need to activate the dark mode directly, you can use the `theme` property: [`show`](/toaster#theme)
@@ -14,9 +14,9 @@ category: 'Customization'
 - Snippet from [`shadcn/ui` Dark Mode documentation](https://ui.shadcn.com/docs/dark-mode/vite#dark-mode).
 
 ```tsx
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 
-export type Theme = 'dark' | 'light' | 'system';
+export type Theme = "dark" | "light" | "system";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -30,7 +30,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: 'system',
+  theme: "system",
   setTheme: () => null,
 };
 
@@ -38,8 +38,8 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'system',
-  storageKey = 'my-ui-theme',
+  defaultTheme = "system",
+  storageKey = "my-ui-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
@@ -49,13 +49,13 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove('light', 'dark');
+    root.classList.remove("light", "dark");
 
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
-        ? 'dark'
-        : 'light';
+        ? "dark"
+        : "light";
 
       root.classList.add(systemTheme);
       root.style.colorScheme = systemTheme;
@@ -85,7 +85,7 @@ export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 
   if (context === undefined)
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
 
   return context;
 };
@@ -101,10 +101,10 @@ export const useTheme = () => {
 ```tsx
 // 📄 components/ToasterProvider.tsx
 
-import type { ToasterProperties } from '@pheralb/toast';
-import { Toaster } from '@pheralb/toast';
+import type { ToasterProperties } from "@pheralb/toast";
+import { Toaster } from "@pheralb/toast";
 
-import { useTheme } from './themeProvider';
+import { useTheme } from "./themeProvider";
 
 const ToasterProvider = (props: ToasterProperties) => {
   const { theme } = useTheme();
@@ -119,9 +119,9 @@ export default ToasterProvider;
 ```tsx
 // 📄 main.tsx
 
-import ToasterProvider from './providers/toasterProvider';
+import ToasterProvider from "./providers/toasterProvider";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider defaultTheme="system" storageKey="my-ui-theme">
       <App />
@@ -143,21 +143,19 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 ```tsx
 // 📄 components/ToasterNextTheme.tsx
 
-'use client';
+"use client";
 
 import {
   Toaster,
   type ToastTheme,
   type ToasterProperties,
-} from '@pheralb/toast';
+} from "@pheralb/toast";
 
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 const ToasterNextTheme = (props: ToasterProperties) => {
   const { theme } = useTheme();
-  return (
-    <Toaster toastFont="font-sans" theme={theme as ToastTheme} {...props} />
-  );
+  return <Toaster theme={theme as ToastTheme} {...props} />;
 };
 
 export default ToasterNextTheme;
