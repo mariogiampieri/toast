@@ -1,6 +1,6 @@
 ---
 title: "Dark Mode"
-description: "This page shows examples of how to use next-themes (Next.js) or remix-themes (Remix) libraries"
+description: "This page shows examples of how to set up the dark mode theme for the Toaster component. Using Vite, Next.js (with next-themes) or Remix (with remix-themes)."
 category: "Customization"
 ---
 
@@ -116,7 +116,7 @@ export default ToasterProvider;
 
 2. Import the `ToasterProvider` component in the `main.tsx` file:
 
-```tsx
+```tsx {3, 9}
 // 📄 main.tsx
 
 import ToasterProvider from "./providers/toasterProvider";
@@ -163,8 +163,10 @@ export default ToasterNextTheme;
 
 2. Import the `ToasterNextTheme` component in the `layout/app.tsx` file:
 
-```tsx
+```tsx {3, 20}
 // 📄 layout/app.tsx
+
+import ToasterNextTheme from "@/components/ToasterNextTheme";
 
 export default function RootLayout({
   children,
@@ -195,7 +197,7 @@ export default function RootLayout({
 
 Import the `useTheme` hook from `remix-themes` and change the theme value:
 
-```tsx
+```tsx {4, 19}
 // 📄 app/root.tsx
 
 import clsx from 'clsx';
