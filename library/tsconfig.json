@@ -23,9 +23,10 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.tsx",
     "src/main.tsx",
     "src/test/toast.test.tsx",
-    "src/utils/parseHTML.tsx"
+    "src/utils/htmlToJsx.tsx"
   ],
   "exclude": ["node_modules", "dist"]
 }
