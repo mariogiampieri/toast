@@ -5,7 +5,7 @@ import type {
   ToastPropsWithLoading,
   Variant,
 } from "../types/toast.types";
-
+import { htmlToJsx } from "@/utils/htmlToJsx";
 import { useCallback, useEffect, useState } from "react";
 
 import { Error, Info, Loading, Success, Warning } from "../icons";
@@ -223,7 +223,9 @@ const Toast = (props: ToastComponentProps) => {
         >
           <p id={`toast-title-${props.id}`}>{toastText}</p>
           {props.description && (
-            <p id={`toast-description-${props.id}`}>{props.description}</p>
+            <div id={`toast-description-${props.id}`}>
+              {htmlToJsx(props.description)}
+            </div>
           )}
         </div>
       </div>
